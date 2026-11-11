@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>研究レポート：いいねの流れのシミュレーション｜マチアプ攻略シミュレーター Heartfolio</title>
+    <meta name="description" content="マッチングアプリのいいねの流れを、いいねする確率と返す確率のモデルでシミュレーションした研究レポート。男女の非対称、人気の偏り（ジニ係数）、先行研究との一致、モデルの限界をまとめました。PDF でも読めます。" />
+    <meta name="theme-color" content="#f7f4ff" />
+    <link rel="icon" href="../../../favicon.ico" sizes="any" />
+    <link rel="icon" href="../../../favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="../../../favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../../../apple-touch-icon.png" />
+    <link rel="canonical" href="https://laplaciannin102.github.io/heartfolio/notes/reports/like-flow/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:url" content="https://laplaciannin102.github.io/heartfolio/notes/reports/like-flow/" />
+    <meta property="og:site_name" content="Heartfolio" />
+    <meta property="og:title" content="研究レポート：いいねの流れのシミュレーション｜マチアプ攻略シミュレーター Heartfolio" />
+    <meta property="og:description" content="いいねする確率と返す確率のモデルで、男女の非対称と人気の偏りを調べた研究レポート。先行研究との一致と限界も。" />
+    <meta property="og:image" content="https://laplaciannin102.github.io/heartfolio/play/ogp.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Heartfolio（ハートフォリオ）マチアプ攻略シミュレーター" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"ScholarlyArticle","headline":"マッチングアプリのいいねの流れのシミュレーション：男女の非対称と先行研究との一致","url":"https://laplaciannin102.github.io/heartfolio/notes/reports/like-flow/","inLanguage":"ja","datePublished":"2026-11-08","dateModified":"2026-11-11","image":"https://laplaciannin102.github.io/heartfolio/play/ogp.jpg","author":{"@type":"Person","@id":"https://laplaciannin102.github.io/heartfolio/#creator","name":"laplaciannin102","url":"https://github.com/laplaciannin102"},"publisher":{"@type":"Person","@id":"https://laplaciannin102.github.io/heartfolio/#creator","name":"laplaciannin102","url":"https://github.com/laplaciannin102"},"isPartOf":{"@type":"WebSite","url":"https://laplaciannin102.github.io/heartfolio/","name":"Heartfolio"}},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"トップ","item":"https://laplaciannin102.github.io/heartfolio/"},{"@type":"ListItem","position":2,"name":"ノート","item":"https://laplaciannin102.github.io/heartfolio/notes/"},{"@type":"ListItem","position":3,"name":"研究レポート 01：いいねの流れ","item":"https://laplaciannin102.github.io/heartfolio/notes/reports/like-flow/"}]}]}</script>
+      <link rel="preload" as="font" type="font/woff2" href="../../../assets/hf-rounded-800-ccCKmJUh.woff2" crossorigin />
+    <script>try{document.documentElement.dataset.hfToc=localStorage.getItem("hf-toc-closed")==="1"?"closed":"open"}catch(e){document.documentElement.dataset.hfToc="open"}</script>
+    <script type="module" crossorigin src="../../../assets/chrome-CKUjgVbh.js"></script>
+    <link rel="stylesheet" crossorigin href="../../../assets/chrome-DOCLPyAI.css">
+    <link rel="stylesheet" crossorigin href="../../../assets/like-flow-DAFJGnBF.css">
+  </head>
+  <body class="hf-paper-page" data-toc data-page-name="研究レポート">
+    <a class="hf-skip" href="#hf-main">本文へ</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="hf-i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.2a4.2 4.2 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z" /></symbol>
+  <symbol id="hf-i-chat" viewBox="0 0 24 24"><path d="M4 5.5h16v10.5H10l-6 4.5z" /><path d="M8.5 10.5h7" /></symbol>
+  <symbol id="hf-i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.8-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.2 12 21 12 21z" /><circle cx="12" cy="9.8" r="2.4" /></symbol>
+  <symbol id="hf-i-ring" viewBox="0 0 24 24"><circle cx="12" cy="14.5" r="6" /><path d="M9.2 5.2 12 3l2.8 2.2L12 8.4z" /></symbol>
+  <symbol id="hf-i-flag" viewBox="0 0 24 24"><path d="M5.5 21V4" /><path d="M5.5 4.5h12l-2.4 4 2.4 4h-12" /></symbol>
+  <symbol id="hf-i-calendar" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5" /><path d="M4 10.5h16M8.5 3.5v4M15.5 3.5v4" /></symbol>
+  <symbol id="hf-i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2" /><path d="M3 20a6 6 0 0 1 12 0" /><circle cx="17" cy="9.5" r="2.5" /><path d="M16 14.2a5 5 0 0 1 5.2 5" /></symbol>
+  <symbol id="hf-i-phone" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.5" /><path d="M11 17.5h2" /></symbol>
+  <symbol id="hf-i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3.2 3.2 3.2 14.8 0 18M12 3c-3.2 3.2-3.2 14.8 0 18" /></symbol>
+  <symbol id="hf-i-send" viewBox="0 0 24 24"><path d="M20.5 3.5 3.5 10.5l7 3 3 7z" /><path d="m10.5 13.5 10-10" /></symbol>
+  <symbol id="hf-i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16" /><path d="m8 15 4-5 3 3 5-6" /></symbol>
+  <symbol id="hf-i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z" /></symbol>
+  <symbol id="hf-i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></symbol>
+  <symbol id="hf-i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></symbol>
+  <symbol id="hf-i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol>
+  <symbol id="hf-i-list" viewBox="0 0 24 24"><path d="M9 6.5h11M9 12h11M9 17.5h11" /><circle cx="4.5" cy="6.5" r="1" /><circle cx="4.5" cy="12" r="1" /><circle cx="4.5" cy="17.5" r="1" /></symbol>
+  <symbol id="hf-i-side" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" /><path d="M9.5 4.5v15" /></symbol>
+</svg>
+
+<header class="hf-site" data-site>
+  <div class="hf-site-inner">
+    <a class="hf-site-logo" href="../../../" aria-label="Heartfolio トップ">
+      <img src="../../../assets/w2-CpmlpJKF.webp" alt="Heartfolio" width="336" height="67" />
+    </a>
+    <nav class="hf-site-nav" id="hf-site-nav" aria-label="サイトのページ" data-nav>
+      <a href="../../../game/"><span lang="en">GAME</span><small>ゲーム紹介</small></a>
+      <a href="../../../characters/"><span lang="en">CHARACTERS</span><small>キャラクター</small></a>
+      <a href="../../../system/"><span lang="en">SYSTEM</span><small>しくみ</small></a>
+      <a href="../../../notes/"><span lang="en">NOTES</span><small>ノート</small></a>
+      <a href="../../../about/"><span lang="en">ABOUT</span><small>制作について</small></a>
+    </nav>
+    <button class="hf-menu-button" type="button" aria-expanded="false" aria-controls="hf-site-nav" data-menu-button>
+      <svg class="hf-ico" aria-hidden="true"><use href="#hf-i-menu" /></svg>メニュー
+    </button>
+    <a class="hf-button hf-button-primary hf-site-play" href="../../../play/"><span lang="en">PLAY</span><small>遊ぶ</small></a>
+  </div>
+</header>
+
+<div class="hf-bar" data-bar>
+  <div class="hf-bar-inner">
+    <a class="hf-bar-logo" href="../../../" aria-label="Heartfolio トップ"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3e%3c!--%20ハートフォリオのマーク（L2）：ハート型のドーナツグラフを、右肩上がりの矢印が突き抜ける%20--%3e%3cdefs%3e%3cpath%20id='h'%20d='M50%2090%20C22%2070%206%2052%206%2033%20C6%2018%2017%208%2031%208%20C40%208%2046%2013%2050%2020%20C54%2013%2060%208%2069%208%20C83%208%2094%2018%2094%2033%20C94%2052%2078%2070%2050%2090%20Z'/%3e%3cmask%20id='ring'%20maskUnits='userSpaceOnUse'%20x='0'%20y='0'%20width='100'%20height='100'%3e%3cuse%20href='%23h'%20fill='%23fff'/%3e%3cuse%20href='%23h'%20fill='%23000'%20transform='translate(50%2048)%20scale(.52)%20translate(-50%20-48)'/%3e%3c/mask%3e%3c/defs%3e%3cg%20mask='url(%23ring)'%3e%3cpolygon%20points='50,48%2050,-50%20150,-50%20150,148'%20fill='%236b5cff'/%3e%3cpolygon%20points='50,48%20150,148%20-50,148%20-50,66'%20fill='%23c25cf0'/%3e%3cpolygon%20points='50,48%20-50,66%20-50,-50%2050,-50'%20fill='%23ff7a6b'/%3e%3cg%20stroke='%23fff'%20stroke-width='4'%3e%3cline%20x1='50'%20y1='48'%20x2='50'%20y2='0'/%3e%3cline%20x1='50'%20y1='48'%20x2='110'%20y2='108'/%3e%3cline%20x1='50'%20y1='48'%20x2='-10'%20y2='59'/%3e%3c/g%3e%3c/g%3e%3cg%20stroke='%23fff'%20stroke-linecap='round'%20stroke-linejoin='round'%20fill='%23fff'%3e%3cpolyline%20points='26,64%2040,53%2051,59%2081,23'%20fill='none'%20stroke-width='12'/%3e%3cpolygon%20points='89,13%2087.5,28%2075.5,19'%20stroke-width='6'/%3e%3c/g%3e%3cg%20stroke='%231f1b3a'%20stroke-linecap='round'%20stroke-linejoin='round'%20fill='%231f1b3a'%3e%3cpolyline%20points='26,64%2040,53%2051,59%2081,23'%20fill='none'%20stroke-width='6'/%3e%3cpolygon%20points='89,13%2087.5,28%2075.5,19'%20stroke-width='2'/%3e%3c/g%3e%3c/svg%3e" alt="" width="28" height="28" /></a>
+    <a class="hf-bar-page" href="#hf-main" data-bar-page></a>
+    <nav class="hf-bar-chapters" aria-label="このページの章" data-bar-chapters></nav>
+    <span class="hf-bar-current" data-bar-now hidden></span>
+    <button class="hf-bar-here" type="button" aria-expanded="false" data-bar-here>
+      <span>このページ：</span><span data-bar-current></span><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-down" /></svg>
+    </button>
+    <a class="hf-button hf-button-primary hf-button-small hf-bar-play" href="../../../play/">遊ぶ</a>
+  </div>
+  <div class="hf-bar-menu" id="hf-bar-menu" data-bar-menu hidden></div>
+</div>
+
+    <main id="hf-main" class="hf-paper-wrap">
+      <div class="hf-paper-actions">
+        <nav class="hf-crumbs" aria-label="パンくず"><a href="../../../">トップ</a><span aria-hidden="true">›</span><a href="../../">ノート</a><span aria-hidden="true">›</span><span aria-current="page">研究レポート 01</span></nav>
+        <a class="hf-paper-pdf" href="./heartfolio-research-like-flow.pdf" download>PDF をダウンロード</a>
+      </div>
+
+      <article class="hf-paper">
+        <header class="hf-paper-head">
+          <p class="hf-paper-kind">研究レポート 01（抜粋）</p>
+          <h1>マッチングアプリのいいねの流れのシミュレーション<small>男女の非対称と先行研究との一致</small></h1>
+          <p class="hf-paper-author">laplaciannin102</p>
+          <p class="hf-paper-date"><time datetime="2026-11-08">2026年11月8日</time><span class="hf-nb">（<time datetime="2026-11-11">11月11日</time>改訂）</span></p>
+        </header>
+
+        <section class="hf-paper-abstract" aria-labelledby="abstract-title" data-chapter="要旨">
+          <h2 id="abstract-title">要旨</h2>
+          <p>マッチングアプリを題材にしたゲーム Heartfolio のために、ある男女の組で「プロフを見ていいねする確率」と「届いたいいねに返す確率」を表すモデルを作り、仮想の利用者どうしにいいねを送り合わせるシミュレーションを行った。送ったいいねがマッチになる割合は、男性から女性へが約18%、女性から男性へが約41%で、男性が受け取るいいねは一部の人に強く集中した（ジニ係数 0.60）。また、モデルに前提として入れていない傾向、すなわち「自分より望ましい相手にいいねを送る」「差が大きいほど返されにくい」「マッチした二人の魅力が似る」が、結果として現れた。いずれもオンラインの出会いや恋人どうしについての先行研究と、向きがおおむね一致する。ただし魅力の相関は、先行研究が外見の魅力を測っているので、大きさの比較は目安にとどまる。</p>
+          <p class="hf-paper-notice">この文書は、研究の一部を抜き出したものです。式は、いいねする確率の形だけを載せています。パラメータの値と較正の手順の細部は載せていません。</p>
+        </section>
+
+        <section aria-labelledby="s1" data-chapter="1. はじめに">
+          <h2 id="s1"><span>1.</span>はじめに</h2>
+          <p>ゲームの中では、お相手（CPU）が毎日だれかのプロフを見て、いいねするかを決める。プレイヤーから届いたいいねに返すかも決める。この判断がでたらめだと、マッチングアプリらしい手ざわりは出ない。人気の人にはいいねが集まり、高望みのいいねはなかなか返ってこない、という感覚が要る。</p>
+          <p>そこで、判断を確率のモデルで表し、それを多くの仮想の利用者に当てはめたとき、全体としてどんな流れになるかを調べた。確かめたかったのは二つである。一つは、男女でいいねの送り方と受け取り方が違うという、よく知られた非対称が出るか。もう一つは、モデルに直接入れていない傾向が、先行研究の知見と合う形で現れるかである。</p>
+        </section>
+
+        <section aria-labelledby="s2" data-chapter="2. 方法">
+          <h2 id="s2"><span>2.</span>方法</h2>
+          <h3>2.1 なぜ式で表すか</h3>
+          <p>判断を学習モデルで表す案も検討した。正解のラベルを言語モデルに付けさせ、それを学習させてブラウザで動かす方法である。しかし、ラベルを作る手間が大きく、言語モデルの付けたラベルが現実の判断を表している保証もない。ゲームに要るのは、もっともらしい確率が手軽に出ることなので、少数の考え方を組み合わせた式で表すことにした。式であれば、どの要素がどう効くかを説明でき、ブラウザの中で計算できる。</p>
+          <h3>2.2 モデルの考え方</h3>
+          <p>利用者は、性別・年齢と、6つの属性を持つ。属性は2種類に分けた。</p>
+          <ul>
+            <li><b>縦型の属性</b>（顔・年収・学歴）：高いほど、だれからも好まれる。</li>
+            <li><b>横型の属性</b>（アウトドア度・社交性・家庭志向）：自分の理想に近いほど好まれる。有利な値は人ごとに違う。</li>
+          </ul>
+          <p>相手をどれだけ好むかは、これらの属性と年齢の近さ、好みの個人差、二人の組ごとに決まる相性の揺らぎから決まる。縦型の属性からは、異性から見た「市場価値」を作る。いいねする確率と返す確率は、別々の式で表し、次の要素を使い分けた。</p>
+          <ul>
+            <li><b>好みと相性</b>：相手を好むほど、いいねしやすく、返しやすい。</li>
+            <li><b>相手の人気</b>：市場価値が平均より高い相手ほど、選ばれやすい。</li>
+            <li><b>高嶺の花</b>（いいねするとき）：自分より市場価値の高い相手ほど、その差のぶん、いいねをためらう。</li>
+            <li><b>自分の基準</b>（返すとき）：返すかどうかは、自分の市場価値が高いほど厳しくなる。</li>
+          </ul>
+          <p>たとえば多次元のモデルでは、プロフを1回見たときにいいねする確率を、次の式で表した。</p>
+          <div class="hf-paper-eq">
+            <div class="hf-paper-align" role="math" aria-label="P いいね ＝ シグマ（アルファ ＋ ベータ U − ロー D）、D ＝ max（0、V 相手 − V 自分）">
+              <span><math displaystyle="true" aria-hidden="true"><msub><mi>P</mi><mtext>いいね</mtext></msub></math></span>
+              <span><math displaystyle="true" aria-hidden="true"><mo>=</mo><mi>σ</mi><mo stretchy="false">(</mo><mi>α</mi><mo>+</mo><mi>β</mi><mi>U</mi><mo>−</mo><mi>ρ</mi><mi>D</mi><mo stretchy="false">)</mo></math></span>
+              <span><math displaystyle="true" aria-hidden="true"><mi>D</mi></math></span>
+              <span><math displaystyle="true" aria-hidden="true"><mo>=</mo><mi>max</mi><mo stretchy="false">(</mo><mn>0</mn><mo separator="true">,</mo><msub><mi>V</mi><mtext>相手</mtext></msub><mo>−</mo><msub><mi>V</mi><mtext>自分</mtext></msub><mo stretchy="false">)</mo></math></span>
+            </div>
+            <span class="hf-paper-eq-no">(1)</span>
+          </div>
+          <ul class="hf-paper-where">
+            <li><math><mi>U</mi></math>：相手をどれだけ好むか。好みと相性に、相手の人気の分を足したもの</li>
+            <li><math><mi>V</mi></math>：市場価値。<math><mi>D</mi></math>：相手の市場価値が自分を上回るぶん（下回るときは 0）。<math><mi>U</mi></math>・<math><mi>V</mi></math>・<math><mi>D</mi></math> は、属性の10点を 1 と数える</li>
+            <li><math><mi>α</mi></math>：平均のいいね率を合わせる定数。<math><mi>β</mi></math>：選り好みの強さ。<math><mi>ρ</mi></math>：高嶺の花の強さ。どれも男女で値が違う</li>
+            <li><math><mi>σ</mi></math>：どんな値も 0〜1 の確率に変える S 字の関数。<math><mi>σ</mi><mo stretchy="false">(</mo><mi>z</mi><mo stretchy="false">)</mo><mo>=</mo><mn>1</mn><mo>/</mo><mo stretchy="false">(</mo><mn>1</mn><mo>+</mo><msup><mi>e</mi><mrow><mo>−</mo><mi>z</mi></mrow></msup><mo stretchy="false">)</mo></math></li>
+          </ul>
+          <p>相手を好むほど、確率は上がる。高嶺の花の項 <math><mi>ρ</mi><mi>D</mi></math> は、相手の市場価値が自分より高いときだけ、S 字の関数に入れる前の値から、その差に比例するぶんを引く。市場価値の高い相手は好まれやすくもあるので、多くの場合、確率は下がらずに、上がり方がゆるやかになる。返す確率は、S 字の関数に、返す率の上限を掛けた形で表し、自分の市場価値が高いほど基準が厳しくなるようにした。</p>
+          <p>この形には、先行研究の裏付けがある。好みを数で表し、S 字の関数で確率に変える形は、オンラインの出会いで最初に連絡するかどうかの分析にも使われている<sup>[3]</sup>。その分析も、相手と自分の属性の差を、相手が上のときと下のときに分けて扱っている。高嶺の花の項を入れたのは、人は自分より望ましい相手に連絡するが、どこまで上を狙うかは自分の望ましさに応じて決まる、という知見<sup>[1]</sup>に合わせるためである。一方で、自分の魅力によらず、魅力的な相手ほど連絡されやすいという観察もある<sup>[3]</sup>。この観察は、送り手を外見の評価で分けて平均したものである。式(1)でも、送り手を自分の市場価値で分けて平均すると、どの層でも、相手の顔の点が高いほど確率は上がる。</p>
+          <p>平均のいいね率は、男性のほうが気軽にいいねし、女性は選り好みするという前提で、男女で差を付けた。</p>
+          <h3>2.3 シミュレーション</h3>
+          <p>男女同数の仮想の利用者を作り、期間を区切って、毎ターンいいねを送り合い、返し合わせた。男性は1ターンあたり女性より多く送る。比べるために、魅力を1つの数にまとめたモデル（以下、1次元）と、属性を分けたモデル（以下、多次元）の二つを用意し、多次元では選り好みの強さを調整して、受け取るいいねの分布を1次元にそろえた。主な指標は乱数の種を変えて10回くり返し、ばらつきが小さいことを確かめた。</p>
+          <p>人気の偏りは、受け取ったいいねの数のジニ係数で見た。0 なら全員が同じ数を受け取り、1 に近いほど一部の人に集中している。</p>
+        </section>
+
+        <section aria-labelledby="s3" data-chapter="3. 結果">
+          <h2 id="s3"><span>3.</span>結果</h2>
+          <h3>3.1 男女の非対称</h3>
+          <p>1人あたりの受け取ったいいねは、平均で男性が約45、女性が約100で、女性が約2.2倍だった。マッチは男女1組で1つと数えるので、男女同数の利用者では、マッチの数の平均は男女で同じになる（約36）。男性は、受け取るいいねが少ないぶんを、自分から多く送ることで補っている（図1）。</p>
+          <figure class="hf-paper-figure">
+            <div class="hf-pbars" role="img" aria-label="1人あたりの平均。受け取ったいいねは男性約45、女性約100。マッチの数は男女とも約36">
+              <p class="hf-pbar-group">受け取ったいいね</p>
+              <div class="hf-pbar-row"><span class="hf-pbar-label">男性</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-a" style="--v: 45"></span></span><span class="hf-pbar-value">45</span></div>
+              <div class="hf-pbar-row"><span class="hf-pbar-label">女性</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-b" style="--v: 100"></span></span><span class="hf-pbar-value">100</span></div>
+              <p class="hf-pbar-group">マッチ</p>
+              <div class="hf-pbar-row"><span class="hf-pbar-label">男性</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-a" style="--v: 36"></span></span><span class="hf-pbar-value">36</span></div>
+              <div class="hf-pbar-row"><span class="hf-pbar-label">女性</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-b" style="--v: 36"></span></span><span class="hf-pbar-value">36</span></div>
+            </div>
+            <figcaption><b>図1</b>　1人あたりの、受け取ったいいねとマッチの数（平均。<span class="hf-nb">棒は 0〜100）</span></figcaption>
+          </figure>
+          <p>男性は送る数が多く、返ってくる割合が低い。女性は受け取る数が多い。送ったいいねがマッチになった割合は、男性から女性へが約18%、女性から男性へが約41%だった（図2）。</p>
+          <figure class="hf-paper-figure">
+            <div class="hf-pbars" role="img" aria-label="送ったいいねがマッチになった割合。男性から女性へ約18%、女性から男性へ約41%">
+              <div class="hf-pbar-row"><span class="hf-pbar-label">男性 → 女性</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-a" style="--v: 18"></span></span><span class="hf-pbar-value">18%</span></div>
+              <div class="hf-pbar-row"><span class="hf-pbar-label">女性 → 男性</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-b" style="--v: 41"></span></span><span class="hf-pbar-value">41%</span></div>
+            </div>
+            <figcaption><b>図2</b>　送ったいいねがマッチになった割合</figcaption>
+          </figure>
+          <p>受け取るいいねの偏りは、男性のほうが大きい。ジニ係数は男性 0.60、女性 0.41 で（図3）、男性では、多くのいいねを受け取る少数の人と、ほとんど受け取らない多くの人に分かれた。プレイヤーが男性なら、送ったいいねの大半が返ってこないのが、このモデルでは「ふつう」になる。</p>
+          <figure class="hf-paper-figure">
+            <div class="hf-pbars" role="img" aria-label="受け取るいいねのジニ係数。男性 0.60、女性 0.41">
+              <div class="hf-pbar-row"><span class="hf-pbar-label">男性が受け取る</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-a" style="--v: calc(0.60 * 100)"></span></span><span class="hf-pbar-value">0.60</span></div>
+              <div class="hf-pbar-row"><span class="hf-pbar-label">女性が受け取る</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-b" style="--v: calc(0.41 * 100)"></span></span><span class="hf-pbar-value">0.41</span></div>
+            </div>
+            <figcaption><b>図3</b>　受け取ったいいねの数のジニ係数（0〜1。大きいほど一部に集中）</figcaption>
+          </figure>
+          <h3>3.2 被好意数という見方</h3>
+          <p>受け取ったいいねの数だけでは、好意を得た量を測りきれない。受け取るいいねが少ない人も、自分から送って返してもらうことで好意を得ているからである。そこで「自分にいいねしてくれた人」と「自分がいいねして返してくれた人」を合わせた人数（重なりは1人と数える）を、被好意数と呼んで数えた。被好意数のジニ係数は、受け取ったいいねの数のジニ係数より小さく、偏りは見かけほど大きくない。</p>
+          <h3>3.3 1次元と多次元</h3>
+          <p>1次元の「魅力」は、顔・年収・学歴などをまとめた総合の評価と考えられる。そのため、受け取るいいねの分布は、どちらのモデルでも近くなるのが自然である。実際、選り好みの強さが同じままだと、多次元のほうが集中は弱かった。横型の属性や好みの個人差のぶん、だれから見ても魅力的という成分が薄まるためである。選り好みを強めると、分布はほぼ重なった（表1）。</p>
+          <div class="hf-paper-table-wrap">
+            <table class="hf-paper-table hf-paper-table-narrow">
+              <caption><b>表1</b>　選り好みの強さを合わせたあとの、受け取るいいねのジニ係数（1次元と多次元の値）</caption>
+              <thead><tr><th scope="col">受け取る側</th><th scope="col">二つのモデルの値</th></tr></thead>
+              <tbody>
+                <tr><td>女性</td><td>0.406 と 0.406</td></tr>
+                <tr><td>男性</td><td>0.596 と 0.599</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>選り好みの強さをそろえたまま比べると、好みの個人差が大きいほど人気の集中が和らぎ、マッチの総数が増えた。好みがばらけているほうが、いいねが多くの人に行き渡る。</p>
+          <p>受け取るいいねを左右する属性は男女で違い、男性では年収・顔・学歴の順に効き、女性では顔の影響が大きかった。横型の属性は、だれにとって有利かが人によるので、全体として有利な値はない。ただし似た者どうしは結ばれやすく、横型の属性の差は、ランダムな組、いいねした組、マッチした組の順に小さくなった（図4）。</p>
+          <figure class="hf-paper-figure">
+            <div class="hf-pbars" role="img" aria-label="横型の属性の差の平均。ランダムな組で約17、いいねした組で約15、マッチした組で約13">
+              <div class="hf-pbar-row"><span class="hf-pbar-label">ランダムな組</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-c" style="--v: calc(17 * 5)"></span></span><span class="hf-pbar-value">17</span></div>
+              <div class="hf-pbar-row"><span class="hf-pbar-label">いいねした組</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-a" style="--v: calc(15 * 5)"></span></span><span class="hf-pbar-value">15</span></div>
+              <div class="hf-pbar-row"><span class="hf-pbar-label">マッチした組</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-b" style="--v: calc(13 * 5)"></span></span><span class="hf-pbar-value">13</span></div>
+            </div>
+            <figcaption><b>図4</b>　二人の横型の属性の差（0〜100 の属性での差の平均。小さいほど似ている。<span class="hf-nb">棒は 0〜20）</span></figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="s4" data-chapter="4. 先行研究との比較">
+          <h2 id="s4"><span>4.</span>先行研究との比較</h2>
+          <p>モデルに前提として与えていない次の傾向が、結果として現れた（表2）。</p>
+          <div class="hf-paper-table-wrap">
+            <table class="hf-paper-table">
+              <caption><b>表2</b>　先行研究の知見と、本モデルの結果</caption>
+              <thead><tr><th scope="col">先行研究の知見</th><th scope="col">本モデル</th></tr></thead>
+              <tbody>
+                <tr><td>人は自分より望ましい相手に連絡する。望ましさの順位で、平均<span class="hf-nb">約25%上<sup>[1]</sup></span></td><td>いいねの7〜8割が自分より人気の相手へ。魅力の比の中央値で14〜33%上（研究は順位の差、本モデルは魅力の比なので、比べられるのは向きまで）</td></tr>
+                <tr><td>望ましさの差が大きいほど返信されにくい<sup>[1]</sup></td><td>男性が女性に送ったいいねでは、魅力の差が小さいと<span class="hf-nb">約27%、</span>相手の魅力が大きく上だと<span class="hf-nb">約2%</span>が返ってきた</td></tr>
+                <tr><td>恋人どうしの外見の魅力の相関は約0.39<sup>[2]</sup></td><td>マッチした二人の相関は 0.40（1次元）、0.29（多次元）</td></tr>
+                <tr><td>男性が受け取るいいねのジニ係数は<span class="hf-nb">約0.54〜0.58</span>（非公式な集計。少人数の調査などからの推計で、目安）</td><td>0.60</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p>魅力の相関は、いいねの段階では約0.1と小さく、返すかどうかの段階で大きくなった（図5）。送るときはだれもが上を目指し、受け入れられるのは釣り合う相手、という構造である。ゲームの中では、高望みのいいねがなかなか返ってこない体験になる。ただし、先行研究の値は外見の魅力の相関で、本モデルの魅力は顔・年収・学歴などをまとめた値である。同じ量ではないので、大きさの比較は目安にとどまる。</p>
+          <figure class="hf-paper-figure">
+            <div class="hf-pbars" role="img" aria-label="魅力の相関。いいねの段階で約0.1、マッチした二人で0.40（1次元）と0.29（多次元）、先行研究の恋人どうしの外見で約0.39">
+              <div class="hf-pbar-row"><span class="hf-pbar-label">いいねした組</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-c" style="--v: calc(0.1 * 100)"></span></span><span class="hf-pbar-value">0.1</span></div>
+              <div class="hf-pbar-row"><span class="hf-pbar-label">マッチ（多次元）</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-a" style="--v: calc(0.29 * 100)"></span></span><span class="hf-pbar-value">0.29</span></div>
+              <div class="hf-pbar-row"><span class="hf-pbar-label">マッチ（1次元）</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-a" style="--v: calc(0.40 * 100)"></span></span><span class="hf-pbar-value">0.40</span></div>
+              <div class="hf-pbar-row"><span class="hf-pbar-label">恋人どうし（外見）[2]</span><span class="hf-pbar-track"><span class="hf-pbar hf-pbar-ref" style="--v: calc(0.39 * 100)"></span></span><span class="hf-pbar-value">0.39</span></div>
+            </div>
+            <figcaption><b>図5</b>　二人の魅力の相関。いいねの段階では小さく、マッチの段階で、先行研究の外見の相関に近い大きさになる</figcaption>
+          </figure>
+        </section>
+
+        <section aria-labelledby="s5" data-chapter="5. モデルの前提と限界">
+          <h2 id="s5"><span>5.</span>モデルの前提と限界</h2>
+          <ul>
+            <li>プロフの情報は正確で、全員が全員の属性を知っている前提である。</li>
+            <li>好みや返す基準は、時間がたっても変わらない。妥協も高望み化も起きない。</li>
+            <li>マッチしたあとの行動（メッセージ・デート・交際）は扱っていない。ゲームのデートや交際の確率は、このモデルの外で決めている。</li>
+            <li>異性間のいいねだけを扱っている。</li>
+            <li>式(1)は、一人ひとりで見ると、相手の顔をあまり重く見ない女性で、自分より市場価値の高い相手の顔の点が上がると、確率がわずかに下がることがある。先行研究<sup>[3]</sup>の観察は集団の平均で、こうした一人ひとりの反応までは確かめられていない。</li>
+          </ul>
+        </section>
+
+        <section aria-labelledby="s6" data-chapter="6. 今後">
+          <h2 id="s6"><span>6.</span>今後</h2>
+          <p>先行研究から見て、次の二つを足す余地がある。男性が好む年齢差を、年齢とともに広げること<sup>[4]</sup>。マッチできない日が続くと基準を下げること<sup>[5]</sup>。また、ゲームのプレイの記録が集まり、式では表せない傾向が見えてきたら、学習するモデルへの置き換えも考える。</p>
+          <p>このモデルは、Heartfolio の中でお相手がいいねする確率・返す確率として使っている。ただし、この文書の数値は研究した時点（2026年11月初め）の版で測ったもので、ゲームではそのあと、返す確率の合わせ直しと属性の追加をしている。形のイメージは、ホームページの「しくみ」のページで触って確かめられる。</p>
+        </section>
+
+        <section class="hf-paper-refs" aria-labelledby="refs-title" data-chapter="参考文献">
+          <h2 id="refs-title">参考文献</h2>
+          <ol>
+            <li>Bruch, E. E., &amp; Newman, M. E. J. (2018). Aspirational pursuit of mates in online dating markets. <i>Science Advances</i>, 4(8). <a href="https://doi.org/10.1126/sciadv.aap9815" target="_blank" rel="noopener">doi:10.1126/sciadv.aap9815</a></li>
+            <li>Feingold, A. (1988). Matching for attractiveness in romantic partners and same-sex friends: A meta-analysis and theoretical critique. <i>Psychological Bulletin</i>, 104(2), 226–235. <a href="https://doi.org/10.1037/0033-2909.104.2.226" target="_blank" rel="noopener">doi:10.1037/0033-2909.104.2.226</a></li>
+            <li>Hitsch, G. J., Hortaçsu, A., &amp; Ariely, D. (2010). Matching and sorting in online dating. <i>American Economic Review</i>, 100(1), 130–163. <a href="https://doi.org/10.1257/aer.100.1.130" target="_blank" rel="noopener">doi:10.1257/aer.100.1.130</a></li>
+            <li>Kenrick, D. T., &amp; Keefe, R. C. (1992). Age preferences in mates reflect sex differences in human reproductive strategies. <i>Behavioral and Brain Sciences</i>, 15(1), 75–91. <a href="https://doi.org/10.1017/S0140525X00067595" target="_blank" rel="noopener">doi:10.1017/S0140525X00067595</a></li>
+            <li>Todd, P. M., &amp; Miller, G. F. (1999). From pride and prejudice to persuasion: Satisficing in mate search. In G. Gigerenzer, P. M. Todd, &amp; the ABC Research Group, <i>Simple Heuristics That Make Us Smart</i>. Oxford University Press.</li>
+          </ol>
+        </section>
+      </article>
+
+      <div class="hf-paper-after">
+        <a class="hf-button hf-button-ghost" href="../../">ノートの一覧へ</a>
+        <a class="hf-button hf-button-ghost" href="../../../system/">しくみのページへ</a>
+        <a class="hf-button hf-button-primary" href="../../../play/">ブラウザで遊ぶ</a>
+      </div>
+    </main>
+    <footer class="hf-footer">
+  <div class="hf-footer-inner">
+    <a class="hf-footer-logo" href="../../../"><img src="../../../assets/w1-B3iGRJyr.webp" alt="ハートフォリオ Heartfolio" width="400" height="86" loading="lazy" decoding="async" /></a>
+    <nav class="hf-footer-nav" aria-label="ページ（フッター）">
+      <a href="../../../game/">ゲーム紹介</a>
+      <a href="../../../characters/">キャラクター</a>
+      <a href="../../../system/">しくみ</a>
+      <a href="../../../notes/">ノート</a>
+      <a href="../../../about/">制作について</a>
+      <a href="../../../play/">遊ぶ</a>
+      <a href="../../../privacy/">プライバシー</a>
+    </nav>
+    <p class="hf-footer-note">登場する人物とそのプロフは、すべて架空のものです。人物の画像は AI で作りました。実在の人物・団体・マッチングアプリとは関係ありません。</p>
+    <p class="hf-footer-credit">制作：<a href="https://github.com/laplaciannin102" target="_blank" rel="noopener">laplaciannin102</a></p>
+  </div>
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ゲーム紹介｜マチアプ攻略シミュレーター Heartfolio</title>
+    <meta name="description" content="マチアプ攻略シミュレーター Heartfolio の遊び方。いいねを送ってマッチし、やりとりとデートを重ねて恋人を探します。恋活・婚活・友達作り・下剋上（β）の4つのモードと、デートの地図やミニゲームなどの画面を紹介します。" />
+    <meta name="theme-color" content="#f7f4ff" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+    <link rel="canonical" href="https://laplaciannin102.github.io/heartfolio/game/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:url" content="https://laplaciannin102.github.io/heartfolio/game/" />
+    <meta property="og:site_name" content="Heartfolio" />
+    <meta property="og:title" content="ゲーム紹介｜マチアプ攻略シミュレーター Heartfolio" />
+    <meta property="og:description" content="いいねを送って、マッチして、デートへ。マチアプ攻略シミュレーターの遊び方と4つのモード。" />
+    <meta property="og:image" content="https://laplaciannin102.github.io/heartfolio/play/ogp.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Heartfolio（ハートフォリオ）マチアプ攻略シミュレーター" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"トップ","item":"https://laplaciannin102.github.io/heartfolio/"},{"@type":"ListItem","position":2,"name":"ゲーム紹介","item":"https://laplaciannin102.github.io/heartfolio/game/"}]}]}</script>
+      <link rel="preload" as="font" type="font/woff2" href="../assets/hf-rounded-800-ccCKmJUh.woff2" crossorigin />
+    <script type="module" crossorigin src="../assets/chrome-CKUjgVbh.js"></script>
+    <link rel="stylesheet" crossorigin href="../assets/chrome-DOCLPyAI.css">
+    <link rel="stylesheet" crossorigin href="../assets/game-DZFxjo8e.css">
+  </head>
+  <body>
+    <a class="hf-skip" href="#hf-main">本文へ</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="hf-i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.2a4.2 4.2 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z" /></symbol>
+  <symbol id="hf-i-chat" viewBox="0 0 24 24"><path d="M4 5.5h16v10.5H10l-6 4.5z" /><path d="M8.5 10.5h7" /></symbol>
+  <symbol id="hf-i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.8-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.2 12 21 12 21z" /><circle cx="12" cy="9.8" r="2.4" /></symbol>
+  <symbol id="hf-i-ring" viewBox="0 0 24 24"><circle cx="12" cy="14.5" r="6" /><path d="M9.2 5.2 12 3l2.8 2.2L12 8.4z" /></symbol>
+  <symbol id="hf-i-flag" viewBox="0 0 24 24"><path d="M5.5 21V4" /><path d="M5.5 4.5h12l-2.4 4 2.4 4h-12" /></symbol>
+  <symbol id="hf-i-calendar" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5" /><path d="M4 10.5h16M8.5 3.5v4M15.5 3.5v4" /></symbol>
+  <symbol id="hf-i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2" /><path d="M3 20a6 6 0 0 1 12 0" /><circle cx="17" cy="9.5" r="2.5" /><path d="M16 14.2a5 5 0 0 1 5.2 5" /></symbol>
+  <symbol id="hf-i-phone" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.5" /><path d="M11 17.5h2" /></symbol>
+  <symbol id="hf-i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3.2 3.2 3.2 14.8 0 18M12 3c-3.2 3.2-3.2 14.8 0 18" /></symbol>
+  <symbol id="hf-i-send" viewBox="0 0 24 24"><path d="M20.5 3.5 3.5 10.5l7 3 3 7z" /><path d="m10.5 13.5 10-10" /></symbol>
+  <symbol id="hf-i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16" /><path d="m8 15 4-5 3 3 5-6" /></symbol>
+  <symbol id="hf-i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z" /></symbol>
+  <symbol id="hf-i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></symbol>
+  <symbol id="hf-i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></symbol>
+  <symbol id="hf-i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol>
+  <symbol id="hf-i-list" viewBox="0 0 24 24"><path d="M9 6.5h11M9 12h11M9 17.5h11" /><circle cx="4.5" cy="6.5" r="1" /><circle cx="4.5" cy="12" r="1" /><circle cx="4.5" cy="17.5" r="1" /></symbol>
+  <symbol id="hf-i-side" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" /><path d="M9.5 4.5v15" /></symbol>
+</svg>
+
+<header class="hf-site" data-site>
+  <div class="hf-site-inner">
+    <a class="hf-site-logo" href="../" aria-label="Heartfolio トップ">
+      <img src="../assets/w2-CpmlpJKF.webp" alt="Heartfolio" width="336" height="67" />
+    </a>
+    <nav class="hf-site-nav" id="hf-site-nav" aria-label="サイトのページ" data-nav>
+      <a href="../game/"><span lang="en">GAME</span><small>ゲーム紹介</small></a>
+      <a href="../characters/"><span lang="en">CHARACTERS</span><small>キャラクター</small></a>
+      <a href="../system/"><span lang="en">SYSTEM</span><small>しくみ</small></a>
+      <a href="../notes/"><span lang="en">NOTES</span><small>ノート</small></a>
+      <a href="../about/"><span lang="en">ABOUT</span><small>制作について</small></a>
+    </nav>
+    <button class="hf-menu-button" type="button" aria-expanded="false" aria-controls="hf-site-nav" data-menu-button>
+      <svg class="hf-ico" aria-hidden="true"><use href="#hf-i-menu" /></svg>メニュー
+    </button>
+    <a class="hf-button hf-button-primary hf-site-play" href="../play/"><span lang="en">PLAY</span><small>遊ぶ</small></a>
+  </div>
+</header>
+
+<div class="hf-bar" data-bar>
+  <div class="hf-bar-inner">
+    <a class="hf-bar-logo" href="../" aria-label="Heartfolio トップ"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3e%3c!--%20ハートフォリオのマーク（L2）：ハート型のドーナツグラフを、右肩上がりの矢印が突き抜ける%20--%3e%3cdefs%3e%3cpath%20id='h'%20d='M50%2090%20C22%2070%206%2052%206%2033%20C6%2018%2017%208%2031%208%20C40%208%2046%2013%2050%2020%20C54%2013%2060%208%2069%208%20C83%208%2094%2018%2094%2033%20C94%2052%2078%2070%2050%2090%20Z'/%3e%3cmask%20id='ring'%20maskUnits='userSpaceOnUse'%20x='0'%20y='0'%20width='100'%20height='100'%3e%3cuse%20href='%23h'%20fill='%23fff'/%3e%3cuse%20href='%23h'%20fill='%23000'%20transform='translate(50%2048)%20scale(.52)%20translate(-50%20-48)'/%3e%3c/mask%3e%3c/defs%3e%3cg%20mask='url(%23ring)'%3e%3cpolygon%20points='50,48%2050,-50%20150,-50%20150,148'%20fill='%236b5cff'/%3e%3cpolygon%20points='50,48%20150,148%20-50,148%20-50,66'%20fill='%23c25cf0'/%3e%3cpolygon%20points='50,48%20-50,66%20-50,-50%2050,-50'%20fill='%23ff7a6b'/%3e%3cg%20stroke='%23fff'%20stroke-width='4'%3e%3cline%20x1='50'%20y1='48'%20x2='50'%20y2='0'/%3e%3cline%20x1='50'%20y1='48'%20x2='110'%20y2='108'/%3e%3cline%20x1='50'%20y1='48'%20x2='-10'%20y2='59'/%3e%3c/g%3e%3c/g%3e%3cg%20stroke='%23fff'%20stroke-linecap='round'%20stroke-linejoin='round'%20fill='%23fff'%3e%3cpolyline%20points='26,64%2040,53%2051,59%2081,23'%20fill='none'%20stroke-width='12'/%3e%3cpolygon%20points='89,13%2087.5,28%2075.5,19'%20stroke-width='6'/%3e%3c/g%3e%3cg%20stroke='%231f1b3a'%20stroke-linecap='round'%20stroke-linejoin='round'%20fill='%231f1b3a'%3e%3cpolyline%20points='26,64%2040,53%2051,59%2081,23'%20fill='none'%20stroke-width='6'/%3e%3cpolygon%20points='89,13%2087.5,28%2075.5,19'%20stroke-width='2'/%3e%3c/g%3e%3c/svg%3e" alt="" width="28" height="28" /></a>
+    <a class="hf-bar-page" href="#hf-main" data-bar-page></a>
+    <nav class="hf-bar-chapters" aria-label="このページの章" data-bar-chapters></nav>
+    <span class="hf-bar-current" data-bar-now hidden></span>
+    <button class="hf-bar-here" type="button" aria-expanded="false" data-bar-here>
+      <span>このページ：</span><span data-bar-current></span><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-down" /></svg>
+    </button>
+    <a class="hf-button hf-button-primary hf-button-small hf-bar-play" href="../play/">遊ぶ</a>
+  </div>
+  <div class="hf-bar-menu" id="hf-bar-menu" data-bar-menu hidden></div>
+</div>
+
+    <main id="hf-main">
+      <svg class="gp-symbols" aria-hidden="true" focusable="false">
+        <symbol id="gp-i-pie" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" /><path d="M12 3.5V12l6 6" /></symbol>
+        <symbol id="gp-i-rise" viewBox="0 0 24 24"><path d="M3.5 17l5.5-5.5 4 4 7.5-8" /><path d="M15 7.5h5.5V13" /></symbol>
+        <symbol id="gp-i-trophy" viewBox="0 0 24 24"><path d="M7 4h10v5a5 5 0 01-10 0z" /><path d="M7 6H4v1.5A3.5 3.5 0 007.5 11M17 6h3v1.5a3.5 3.5 0 01-3.5 3.5M12 14v4M8 20h8" /></symbol>
+        <symbol id="gp-i-coin" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" /><path d="M9.5 9h4a1.8 1.8 0 010 3.6H10V16" /></symbol>
+        <symbol id="gp-i-save" viewBox="0 0 24 24"><path d="M5 4h11l3 3v13H5z" /><path d="M8 4v5h7V4M8 20v-6h8v6" /></symbol>
+        <symbol id="gp-i-replay" viewBox="0 0 24 24"><path d="M20 12a8 8 0 11-2.4-5.7" /><path d="M20 3.5v4h-4" /><path d="M10 9l5 3-5 3z" /></symbol>
+        <symbol id="gp-i-play" viewBox="0 0 24 24"><path d="M5 5l8 7-8 7z" /><path d="M13 5l8 7-8 7z" /></symbol>
+        <symbol id="gp-i-sparkle" viewBox="0 0 24 24"><path d="M11 2.5l1.8 6.2L19 10.5l-6.2 1.8L11 18.5l-1.8-6.2L3 10.5l6.2-1.8z" /><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8z" /></symbol>
+        <symbol id="gp-i-music" viewBox="0 0 24 24"><path d="M9 18V5l11-2v13" /><circle cx="6" cy="18" r="3" /><circle cx="17" cy="16" r="3" /></symbol>
+        <symbol id="gp-i-book" viewBox="0 0 24 24"><path d="M4 5.5A2 2 0 016 4h13v14H6a2 2 0 00-2 2z" /><path d="M4 20V5.5M8 8h7" /></symbol>
+        <symbol id="gp-i-bag" viewBox="0 0 24 24"><rect x="3.5" y="7.5" width="17" height="12" rx="2" /><path d="M9 7.5V5.5A1.5 1.5 0 0110.5 4h3A1.5 1.5 0 0115 5.5v2M3.5 12.5h17" /></symbol>
+        <symbol id="gp-i-zoom" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5" /><path d="M15.5 15.5L21 21M10.5 7.5v6M7.5 10.5h6" /></symbol>
+      </svg>
+
+      <section class="hf-cover" aria-labelledby="game-title">
+        <div class="hf-cover-body">
+          <p class="hf-kicker"><span lang="en">GAME</span>ゲーム紹介</p>
+          <h1 class="hf-cover-title" id="game-title"><span class="hf-em">いいねを送って、</span><span class="hf-nb">マッチして、</span><span class="hf-nb">デートへ</span></h1>
+          <p class="hf-cover-lead">マッチングアプリを題材にした恋愛シミュレーションです。限られたいいねをやりくりしながら、期限までに恋人を探します。</p>
+          <ul class="hf-cover-tags">
+            <li class="hf-pill"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-globe" /></svg>ブラウザで遊べる</li>
+            <li class="hf-pill" style="--c: var(--hf-magenta-ink)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-phone" /></svg>スマホでも遊べる</li>
+          </ul>
+          <div class="hf-cover-actions">
+            <a class="hf-button hf-button-primary" href="../play/">ブラウザで遊ぶ</a>
+            <p class="hf-cover-note">無料・登録なし</p>
+          </div>
+        </div>
+        <figure class="hf-cover-visual hf-cover-visual-cutout"><img src="../assets/key-visual-portrait-D-g_9iKr.webp" alt="ハトリ・フォリオ・ユイが並ぶメインの絵" width="1024" height="1536" fetchpriority="high" /></figure>
+      </section>
+
+      <section class="hf-section" id="about" data-chapter="はじめに" aria-labelledby="about-title">
+        <p class="hf-kicker" lang="en">ABOUT</p>
+        <h2 class="hf-section-title" id="about-title">限られたいいねで、恋人を探すゲーム</h2>
+        <p class="hf-section-lead">いいねをだれに、どれだけ送るか。その配り方しだいで、恋の行方が変わります。</p>
+        <div class="gp-stats">
+          <div class="hf-card hf-stat hf-reveal" style="--c: var(--hf-violet-ink)">
+            <span class="hf-bubble"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-users" /></svg></span>
+            <strong class="hf-num"><span data-count="1000">1000</span><small>人以上</small></strong>
+            <span class="hf-stat-label">アプリにいるお相手</span>
+          </div>
+          <div class="hf-card hf-stat hf-reveal" style="--c: var(--hf-coral-ink)">
+            <span class="hf-bubble" style="--c: var(--hf-coral)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-heart" /></svg></span>
+            <strong class="hf-num"><span data-count="100">100</span><small>個</small></strong>
+            <span class="hf-stat-label">最初の1か月に配られるいいね</span>
+          </div>
+          <div class="hf-card hf-stat hf-reveal" style="--c: var(--hf-magenta-ink)">
+            <span class="hf-bubble" style="--c: var(--hf-magenta)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-calendar" /></svg></span>
+            <strong class="hf-num"><span data-count="365">365</span><small>日</small></strong>
+            <span class="hf-stat-label">恋活モードの期限</span>
+          </div>
+          <div class="gp-say hf-reveal">
+            <p class="gp-say-bubble">数字を見てから、<br />決めましょう</p>
+            <img src="../assets/standing-ATm0ksKQ.webp" alt="フォリオ" width="378" height="640" loading="lazy" />
+          </div>
+        </div>
+
+        <h3 class="gp-sub-title">名前の由来は Heart ＋ Portfolio</h3>
+        <div class="gp-equation hf-reveal">
+          <div class="gp-eq-item"><span class="hf-bubble hf-bubble-lg" style="--c: var(--hf-coral)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-heart" /></svg></span><h4 lang="en">Heart</h4><p>恋・好きの気持ち</p></div>
+          <span class="gp-eq-op" aria-hidden="true">＋</span>
+          <div class="gp-eq-item"><span class="hf-bubble hf-bubble-lg"><svg class="hf-ico" aria-hidden="true"><use href="#gp-i-pie" /></svg></span><h4 lang="en">Portfolio</h4><p>資産の配分</p></div>
+          <span class="gp-eq-op" aria-hidden="true">＝</span>
+          <div class="gp-eq-item hf-card gp-eq-result"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3e%3c!--%20ハートフォリオのマーク（L2）：ハート型のドーナツグラフを、右肩上がりの矢印が突き抜ける%20--%3e%3cdefs%3e%3cpath%20id='h'%20d='M50%2090%20C22%2070%206%2052%206%2033%20C6%2018%2017%208%2031%208%20C40%208%2046%2013%2050%2020%20C54%2013%2060%208%2069%208%20C83%208%2094%2018%2094%2033%20C94%2052%2078%2070%2050%2090%20Z'/%3e%3cmask%20id='ring'%20maskUnits='userSpaceOnUse'%20x='0'%20y='0'%20width='100'%20height='100'%3e%3cuse%20href='%23h'%20fill='%23fff'/%3e%3cuse%20href='%23h'%20fill='%23000'%20transform='translate(50%2048)%20scale(.52)%20translate(-50%20-48)'/%3e%3c/mask%3e%3c/defs%3e%3cg%20mask='url(%23ring)'%3e%3cpolygon%20points='50,48%2050,-50%20150,-50%20150,148'%20fill='%236b5cff'/%3e%3cpolygon%20points='50,48%20150,148%20-50,148%20-50,66'%20fill='%23c25cf0'/%3e%3cpolygon%20points='50,48%20-50,66%20-50,-50%2050,-50'%20fill='%23ff7a6b'/%3e%3cg%20stroke='%23fff'%20stroke-width='4'%3e%3cline%20x1='50'%20y1='48'%20x2='50'%20y2='0'/%3e%3cline%20x1='50'%20y1='48'%20x2='110'%20y2='108'/%3e%3cline%20x1='50'%20y1='48'%20x2='-10'%20y2='59'/%3e%3c/g%3e%3c/g%3e%3cg%20stroke='%23fff'%20stroke-linecap='round'%20stroke-linejoin='round'%20fill='%23fff'%3e%3cpolyline%20points='26,64%2040,53%2051,59%2081,23'%20fill='none'%20stroke-width='12'/%3e%3cpolygon%20points='89,13%2087.5,28%2075.5,19'%20stroke-width='6'/%3e%3c/g%3e%3cg%20stroke='%231f1b3a'%20stroke-linecap='round'%20stroke-linejoin='round'%20fill='%231f1b3a'%3e%3cpolyline%20points='26,64%2040,53%2051,59%2081,23'%20fill='none'%20stroke-width='6'/%3e%3cpolygon%20points='89,13%2087.5,28%2075.5,19'%20stroke-width='2'/%3e%3c/g%3e%3c/svg%3e" alt="" width="96" height="96" loading="lazy" /><h4 lang="en">Heartfolio</h4><p>ハートフォリオ</p></div>
+        </div>
+        <ul class="hf-grid hf-grid-3 gp-name-cards">
+          <li class="hf-card hf-reveal"><div class="gp-icon-head"><span class="hf-bubble hf-bubble-sm"><svg class="hf-ico" aria-hidden="true"><use href="#gp-i-pie" /></svg></span><h4>ポートフォリオって？</h4></div><p>手持ちのお金を、何にどれだけ分けて持つか。その組み合わせのことです。</p></li>
+          <li class="hf-card hf-reveal"><div class="gp-icon-head"><span class="hf-bubble hf-bubble-sm" style="--c: var(--hf-coral)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-heart" /></svg></span><h4>このゲームでは</h4></div><p>手持ちのいいねを、だれにどれだけ送るか。人気の人に集めるか、返してくれそうな人に広く送るか。</p></li>
+          <li class="hf-card hf-reveal"><div class="gp-icon-head"><span class="hf-bubble hf-bubble-sm" style="--c: var(--hf-magenta)"><svg class="hf-ico" aria-hidden="true"><use href="#gp-i-rise" /></svg></span><h4>ロゴの形</h4></div><p>ハート形のドーナツグラフ（いいねの配分）を、株価チャートの上がる線が突き抜けています。</p></li>
+        </ul>
+      </section>
+
+      <section class="hf-section" id="flow" data-chapter="遊び方" aria-labelledby="flow-title">
+        <p class="hf-kicker" lang="en">HOW TO PLAY</p>
+        <h2 class="hf-section-title" id="flow-title">4ステップで、恋人を探す</h2>
+        <ol class="hf-grid hf-grid-4 hf-howto">
+          <li class="hf-card hf-howto-step hf-reveal">
+            <div class="hf-howto-top"><span class="hf-no">1</span><span class="hf-bubble" style="--c: var(--hf-coral)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-heart" /></svg></span></div>
+            <h3>いいねを送る</h3>
+            <p>月の初めに配られるいいねを、気になる人に送ります。人気者ほど、返ってきにくくなります。</p>
+            <figure class="hf-shot gp-crop" style="--x: 545; --y: 230; --cw: 455; --ch: 341"><img src="../assets/cards-CIMdCvKc.webp" alt="お相手をさがす画面。プロフのカードが並んでいる" width="1280" height="800" loading="lazy" /></figure>
+          </li>
+          <li class="hf-card hf-howto-step hf-reveal">
+            <div class="hf-howto-top"><span class="hf-no">2</span><span class="hf-bubble"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-chat" /></svg></span></div>
+            <h3>マッチして、やりとり</h3>
+            <p>相手がいいねを返すとマッチです。やりとりの画面に、会話と次のデートの予定が出ます。</p>
+            <figure class="hf-shot gp-crop" style="--x: 870; --y: 140; --cw: 392; --ch: 294"><img src="../assets/chat-C_Mg_MN7.webp" alt="やりとりの画面。マッチした相手との会話" width="1280" height="800" loading="lazy" /></figure>
+          </li>
+          <li class="hf-card hf-howto-step hf-reveal">
+            <div class="hf-howto-top"><span class="hf-no">3</span><span class="hf-bubble" style="--c: var(--hf-magenta)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-pin" /></svg></span></div>
+            <h3>デートの行き先を選ぶ</h3>
+            <p>地図から行き先と、そこで何をするかを選びます。相手の好みに合うほど、次のデートにつながります。</p>
+            <figure class="hf-shot gp-crop" style="--x: 470; --y: 150; --cw: 432; --ch: 324"><img src="../assets/datemap-DIWTYdqm.webp" alt="デートプランの地図。駅と路線が並んでいる" width="1280" height="800" loading="lazy" /></figure>
+          </li>
+          <li class="hf-card hf-howto-step hf-reveal">
+            <div class="hf-howto-top"><span class="hf-no">4</span><span class="hf-bubble" style="--c: var(--hf-gold)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-ring" /></svg></span></div>
+            <h3>結ばれたらクリア</h3>
+            <p>恋活は恋人ができたら、婚活は恋人になって婚約できたらクリア。早く結ばれるほど、スコアが高くなります。</p>
+            <figure class="hf-shot gp-crop" style="--x: 400; --y: 230; --cw: 460; --ch: 345"><img src="../assets/clear-BZ76ayi4.webp" alt="恋人ができたときの画面" width="1280" height="800" loading="lazy" /></figure>
+          </li>
+        </ol>
+      </section>
+
+      <section class="hf-section" id="modes" data-chapter="モード" aria-labelledby="modes-title">
+        <p class="hf-kicker" lang="en">MODES</p>
+        <h2 class="hf-section-title" id="modes-title">えらべる4つのモード</h2>
+        <ul class="hf-grid hf-grid-4 gp-modes">
+          <li class="hf-card gp-mode hf-reveal">
+            <img class="gp-mode-pic" src="../assets/clear-romance-BGBIhoHu.webp" alt="" width="480" height="300" loading="lazy" />
+            <div class="gp-mode-body">
+              <h3><span class="hf-bubble hf-bubble-sm" style="--c: var(--hf-coral)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-heart" /></svg></span>恋活</h3>
+              <p>恋人ができたらクリア。相手の人気と、自分から見た相性、かかった日数でスコアが決まります。</p>
+              <span class="hf-pill hf-pill-solid" style="--c: var(--hf-coral-ink)">期限 365日</span>
+            </div>
+          </li>
+          <li class="hf-card gp-mode hf-reveal">
+            <img class="gp-mode-pic" src="../assets/clear-marriage-DllH8XDr.webp" alt="" width="480" height="300" loading="lazy" />
+            <div class="gp-mode-body">
+              <h3><span class="hf-bubble hf-bubble-sm"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-ring" /></svg></span>婚活</h3>
+              <p>恋人になって、婚約できたらクリア。交際中はピンチの場面も起きます。</p>
+              <span class="hf-pill hf-pill-solid">期限 730日</span>
+            </div>
+          </li>
+          <li class="hf-card gp-mode hf-reveal">
+            <img class="gp-mode-pic" src="../assets/clear-friends-DiRSnHyB.webp" alt="" width="480" height="300" loading="lazy" />
+            <div class="gp-mode-body">
+              <h3><span class="hf-bubble hf-bubble-sm" style="--c: var(--hf-teal)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-users" /></svg></span>友達作り</h3>
+              <p>短い期間で、友達を何人作れるか。デートを重ねると、友達になれます。</p>
+              <span class="hf-pill hf-pill-solid" style="--c: var(--hf-teal-ink, #1f7a68)">期間 30日</span>
+            </div>
+          </li>
+          <li class="hf-card gp-mode hf-reveal">
+            <span class="gp-mode-pic gp-rise-pic" aria-hidden="true">
+              <span class="hf-bubble" style="--c: var(--hf-violet)"><svg class="hf-ico"><use href="#gp-i-book" /></svg></span>
+              <span class="hf-bubble" style="--c: var(--hf-coral)"><svg class="hf-ico"><use href="#gp-i-bag" /></svg></span>
+              <span class="hf-bubble hf-bubble-lg" style="--c: var(--hf-magenta)"><svg class="hf-ico"><use href="#gp-i-rise" /></svg></span>
+            </span>
+            <div class="gp-mode-body">
+              <h3><span class="hf-bubble hf-bubble-sm" style="--c: var(--hf-magenta)"><svg class="hf-ico" aria-hidden="true"><use href="#gp-i-rise" /></svg></span>下剋上</h3>
+              <p>冴えない22歳から始めます。勉強や転職で自分を育てながら、相手を探すモードです。</p>
+              <span class="hf-pill hf-pill-solid" style="--c: var(--hf-magenta-ink)">β版・恋活か婚活を選ぶ</span>
+            </div>
+          </li>
+        </ul>
+        <details class="hf-card gp-ways gp-fold hf-reveal" open data-fold-narrow>
+          <summary><h3>自分のプロフの決め方</h3></summary>
+          <dl>
+            <div><dt>自由</dt><dd>年齢や職業などを、自分で決めます。好きなプロフで試したいときに</dd></div>
+            <div><dt>固定</dt><dd>EASY・NORMAL・HARD の決まったプロフ。同じ条件でスコアを比べたいときに</dd></div>
+            <div><dt>ランダム <span class="hf-badge">おすすめ</span></dt><dd>毎回違うプロフ。配られたプロフでどう戦うかを楽しみます</dd></div>
+            <div><dt>手探り</dt><dd>自分のプロフが、終わるまで見えません。相手の反応から探ります</dd></div>
+            <div><dt>チート</dt><dd>いいね無限で、送れば必ず返ってきます。記録と実績には残りません</dd></div>
+          </dl>
+        </details>
+      </section>
+
+      <section class="hf-section" id="screens" data-chapter="画面" aria-labelledby="screens-title">
+        <p class="hf-kicker" lang="en">SCREENS</p>
+        <h2 class="hf-section-title" id="screens-title">画面紹介</h2>
+        <div class="gp-showcase">
+          <article class="gp-show hf-reveal">
+            <figure class="hf-shot gp-zoomable"><button type="button" data-zoom aria-label="お相手をさがす画面を拡大"><img src="../assets/cards-CIMdCvKc.webp" alt="お相手をさがす画面。プロフのカードが並んでいる" width="1280" height="800" loading="lazy" /><span class="gp-zoom-mark" aria-hidden="true"><svg class="hf-ico"><use href="#gp-i-zoom" /></svg></span></button></figure>
+            <div class="gp-show-body">
+              <p class="gp-show-name">お相手をさがす</p>
+              <h3>カードを見て、いいね</h3>
+              <ul class="gp-points">
+                <li><span class="hf-no">1</span><span>プロフと、その人がもらっているいいねの数を見て、送る相手を決めます。送れるのは<span class="hf-nb">1日40個まで</span></span></li>
+                <li><span class="hf-no">2</span><span>並び順や細かい条件で、相手を絞り込めます</span></li>
+                <li><span class="hf-no">3</span><span>カードの縁の輝きは、その人の魅力の階級<span class="hf-nb">（N〜UR）</span>です</span></li>
+              </ul>
+            </div>
+          </article>
+          <article class="gp-show hf-reveal">
+            <figure class="hf-shot gp-zoomable"><button type="button" data-zoom aria-label="やりとりの画面を拡大"><img src="../assets/chat-C_Mg_MN7.webp" alt="やりとりの画面。マッチした相手との会話" width="1280" height="800" loading="lazy" /><span class="gp-zoom-mark" aria-hidden="true"><svg class="hf-ico"><use href="#gp-i-zoom" /></svg></span></button></figure>
+            <div class="gp-show-body">
+              <p class="gp-show-name">やりとり</p>
+              <h3>マッチしたら、会話とデートの予定</h3>
+              <ul class="gp-points">
+                <li><span class="hf-no">1</span><span>マッチした相手から、会話が1通ずつ届きます</span></li>
+                <li><span class="hf-no">2</span><span>次のデートの予定と、これまでのデートの記録も、ここで確かめます</span></li>
+              </ul>
+            </div>
+          </article>
+          <article class="gp-show hf-reveal">
+            <figure class="hf-shot gp-zoomable"><button type="button" data-zoom aria-label="デートプランの地図を拡大"><img src="../assets/datemap-DIWTYdqm.webp" alt="デートプランの地図。駅と路線が並んでいる" width="1280" height="800" loading="lazy" /><span class="gp-zoom-mark" aria-hidden="true"><svg class="hf-ico"><use href="#gp-i-zoom" /></svg></span></button></figure>
+            <div class="gp-show-body">
+              <p class="gp-show-name">デートプランの地図</p>
+              <h3>次のデートは、地図からプランを選ぶ</h3>
+              <ul class="gp-points">
+                <li><span class="hf-no">1</span><span>行き先の駅を選びます。何度か会った相手とは、おうちデートもできます</span></li>
+                <li><span class="hf-no">2</span><span>駅ごとに、そこでできることが3つ出ます。何をするかを選びます</span></li>
+                <li><span class="hf-no">3</span><span>デートの日に、相手の好みに合っていたかで評価が決まります</span></li>
+              </ul>
+            </div>
+          </article>
+        </div>
+
+        <h3 class="gp-sub-title">ほかの画面</h3>
+        <div class="hf-tabs" data-tabs>
+          <div class="hf-tab-list" role="tablist" aria-label="ほかの画面">
+            <button type="button" role="tab" id="tab-scene" aria-controls="panel-scene" aria-selected="true">相手の一言</button>
+            <button type="button" role="tab" id="tab-meetup" aria-controls="panel-meetup" aria-selected="false" tabindex="-1">待ち合わせ探し</button>
+            <button type="button" role="tab" id="tab-transfer" aria-controls="panel-transfer" aria-selected="false" tabindex="-1">乗り換えパズル</button>
+            <button type="button" role="tab" id="tab-stats" aria-controls="panel-stats" aria-selected="false" tabindex="-1">活動の分析</button>
+            <button type="button" role="tab" id="tab-consult" aria-controls="panel-consult" aria-selected="false" tabindex="-1">フォリオの相談室</button>
+          </div>
+          <div class="hf-tab-panels">
+            <div class="hf-tab-panel" role="tabpanel" id="panel-scene" aria-labelledby="tab-scene">
+              <figure class="hf-shot gp-zoomable"><button type="button" data-zoom aria-label="相手の一言の場面を拡大"><img src="../assets/scene-DvmDKxXq.webp" alt="相手から一言届いた場面。返し方を3つから選ぶ" width="1280" height="800" loading="lazy" /><span class="gp-zoom-mark" aria-hidden="true"><svg class="hf-ico"><use href="#gp-i-zoom" /></svg></span></button></figure>
+              <p>デートの数日前に、相手から一言届くことがあります。相手に合う返し方を選ぶと、次のデートが少しうまくいきます。</p>
+            </div>
+            <div class="hf-tab-panel" role="tabpanel" id="panel-meetup" aria-labelledby="tab-meetup" hidden>
+              <figure class="hf-shot gp-zoomable"><button type="button" data-zoom aria-label="待ち合わせ探しを拡大"><img src="../assets/meetup-Ro6GBD1w.webp" alt="待ち合わせ探しのミニゲーム。人混みの顔が並んでいる" width="1280" height="800" loading="lazy" /><span class="gp-zoom-mark" aria-hidden="true"><svg class="hf-ico"><use href="#gp-i-zoom" /></svg></span></button></figure>
+              <p>駅の人混みから、制限時間のうちに相手の顔を見つけるミニゲーム。にぎやかな駅ほど人が多くなります。</p>
+            </div>
+            <div class="hf-tab-panel" role="tabpanel" id="panel-transfer" aria-labelledby="tab-transfer" hidden>
+              <figure class="hf-shot gp-zoomable"><button type="button" data-zoom aria-label="乗り換えパズルを拡大"><img src="../assets/transfer-YPid0OkQ.webp" alt="乗り換えパズル。止まった区間をよけて道を組む" width="1280" height="800" loading="lazy" /><span class="gp-zoom-mark" aria-hidden="true"><svg class="hf-ico"><use href="#gp-i-zoom" /></svg></span></button></figure>
+              <p>電車が止まった！　止まった区間をよけて、待ち合わせの時間までに着く道を組みます。</p>
+            </div>
+            <div class="hf-tab-panel" role="tabpanel" id="panel-stats" aria-labelledby="tab-stats" hidden>
+              <figure class="hf-shot gp-zoomable"><button type="button" data-zoom aria-label="活動の分析の画面を拡大"><img src="../assets/stats-BSfvCvvI.webp" alt="活動の分析の画面。いいねの反応率のグラフ" width="1280" height="800" loading="lazy" /><span class="gp-zoom-mark" aria-hidden="true"><svg class="hf-ico"><use href="#gp-i-zoom" /></svg></span></button></figure>
+              <p>送ったいいねがどれだけ返ってきたかを、相手の人気や魅力ごとにグラフで見られます。</p>
+            </div>
+            <div class="hf-tab-panel" role="tabpanel" id="panel-consult" aria-labelledby="tab-consult" hidden>
+              <figure class="hf-shot gp-zoomable"><button type="button" data-zoom aria-label="フォリオの相談室の画面を拡大"><img src="../assets/consult-BddE36tX.webp" alt="フォリオの相談室の画面" width="1280" height="800" loading="lazy" /><span class="gp-zoom-mark" aria-hidden="true"><svg class="hf-ico"><use href="#gp-i-zoom" /></svg></span></button></figure>
+              <p>「誰にいいねすればいい？」などを聞くと、フォリオがこれまでの数字から答えます。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hf-section" id="extras" data-chapter="やりこみ" aria-labelledby="extras-title">
+        <p class="hf-kicker" lang="en">EXTRAS</p>
+        <h2 class="hf-section-title" id="extras-title">くり返し遊べる、やりこみ要素</h2>
+        <ul class="hf-grid hf-grid-3 gp-extras">
+          <li class="hf-card hf-reveal">
+            <div class="gp-icon-head"><span class="hf-bubble" style="--c: var(--hf-gold)"><svg class="hf-ico" aria-hidden="true"><use href="#gp-i-trophy" /></svg></span><div><h3>実績と称号</h3><p class="gp-muted">全30個</p></div></div>
+            <ul class="gp-chips" aria-label="称号の例">
+              <li>一撃必殺</li><li>高嶺の花を摘んだ</li><li>運命の人</li><li>スピード婚</li><li>待ちの達人</li><li>三冠</li><li class="is-miss">全滅</li><li class="is-miss">高望み</li>
+            </ul>
+            <p>取った実績から、称号を1つ選んで結果に付けられます。うまくいかなかったときの称号もあります。</p>
+          </li>
+          <li class="hf-card hf-reveal">
+            <div class="gp-icon-head"><span class="hf-bubble" style="--c: var(--hf-coral)"><svg class="hf-ico" aria-hidden="true"><use href="#gp-i-coin" /></svg></span><div><h3>ショップ</h3><p class="gp-muted">マッチやデートで貯まる<span class="hf-nb">コインで買う</span></p></div></div>
+            <details class="gp-fold gp-fold-inline" open data-fold-narrow>
+              <summary>買えるアイテム5つ</summary>
+            <ul class="gp-items">
+              <li><b>スーパーいいね</b><span>そのいいねを、返してもらいやすくなる</span></li>
+              <li><b>いいね＋5</b><span>手持ちとは別に送れる、おまけのいいね</span></li>
+              <li><b>ブースト</b><span>数日のあいだ、プロフを見てもらいやすくなる</span></li>
+              <li><b>写真撮り直し</b><span>プロフの写真の、顔の見え方がよくなる</span></li>
+              <li><b>テレパシーの飴</b><span>異性500人の心の声が聞こえる</span></li>
+            </ul>
+            </details>
+          </li>
+          <li class="hf-card hf-reveal">
+            <div class="gp-icon-head"><span class="hf-bubble"><svg class="hf-ico" aria-hidden="true"><use href="#gp-i-save" /></svg></span><div><h3>記録とシェア</h3><p class="gp-muted">友達とスコアを比べる</p></div></div>
+            <details class="gp-fold gp-fold-inline" open data-fold-narrow>
+              <summary>残るもの3つ</summary>
+            <ul class="gp-items">
+              <li><b>ハイスコア</b><span>モードごとに、アイテムなし・飴体験だけ・<span class="hf-nb">アイテムありの3つの表</span></span></li>
+              <li><b>結果の画像</b><span>スコアと称号の入った画像を保存して、共有できる</span></li>
+              <li><b>オートセーブ</b><span>途中でやめても「続きから」遊べる</span></li>
+            </ul>
+            </details>
+          </li>
+        </ul>
+
+        <h3 class="gp-sub-title">らくに遊べて、もりあがる</h3>
+        <ul class="hf-grid hf-grid-4 gp-comfort">
+          <li class="hf-card hf-reveal"><span class="hf-bubble" style="--c: var(--hf-teal)"><svg class="hf-ico" aria-hidden="true"><use href="#gp-i-replay" /></svg></span><h4>さっと一周</h4><p>はじめての人向け。見ているだけで、婚約までの流れが1分ほどで分かります。</p></li>
+          <li class="hf-card hf-reveal"><span class="hf-bubble"><svg class="hf-ico" aria-hidden="true"><use href="#gp-i-play" /></svg></span><h4>オートモード</h4><p>おすすめ順の上から、いいねを自動で送ります。「爆速」なら一気に進みます。</p></li>
+          <li class="hf-card hf-reveal"><span class="hf-bubble" style="--c: var(--hf-magenta)"><svg class="hf-ico" aria-hidden="true"><use href="#gp-i-sparkle" /></svg></span><h4>キラキラ演出</h4><p>魅力の高い相手ほど、カードの縁とマッチの演出が派手に光ります。切ることもできます。</p></li>
+          <li class="hf-card hf-reveal"><span class="hf-bubble" style="--c: var(--hf-coral)"><svg class="hf-ico" aria-hidden="true"><use href="#gp-i-music" /></svg></span><h4>8bit のクラシック</h4><p>ふだんは「愛の挨拶」、婚約したら「結婚行進曲」。開始画面の「サントラ」から聞けます。</p></li>
+        </ul>
+
+        <h3 class="gp-sub-title">スコアは「幸せ」×「早さ」</h3>
+        <div class="gp-formula hf-reveal">
+          <div class="hf-card" style="--c: var(--hf-coral-ink)"><span class="hf-bubble" style="--c: var(--hf-coral)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-heart" /></svg></span><div><h4>幸福度</h4><p>その相手と結ばれたときの幸せ<span class="hf-nb">（0〜100）</span></p></div></div>
+          <span class="gp-op" aria-hidden="true">×</span>
+          <div class="hf-card" style="--c: var(--hf-violet-ink)"><span class="hf-bubble"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-calendar" /></svg></span><div><h4>日数ポイント</h4><p>早く結ばれるほど高い<span class="hf-nb">（0〜100）</span></p></div></div>
+          <span class="gp-op" aria-hidden="true">＝</span>
+          <div class="hf-card" style="--c: var(--hf-magenta-ink)"><span class="hf-bubble" style="--c: var(--hf-magenta)"><svg class="hf-ico" aria-hidden="true"><use href="#gp-i-trophy" /></svg></span><div><h4>スコア</h4><p>恋活・婚活は、最大 <span class="hf-nb">10,000点</span></p></div></div>
+        </div>
+        <div class="gp-score-row">
+          <div class="hf-card gp-donut-card hf-reveal">
+            <h4>幸福度の中身</h4>
+            <div class="gp-donut-wrap">
+              <div class="gp-donut" style="--p: 60" role="img" aria-label="幸福度は、モテ度60%と相性度40%"></div>
+              <dl class="gp-keys">
+                <div><dt><i style="background: var(--hf-coral)"></i>モテ度 60%</dt><dd>相手がどれだけ人気か</dd></div>
+                <div><dt><i style="background: var(--hf-violet)"></i>相性度 40%</dt><dd>自分から見て、相手がどれだけ魅力的か</dd></div>
+              </dl>
+            </div>
+            <p class="gp-muted">友達作りは、期間内に作った友達の人数で競います。</p>
+          </div>
+          <div class="hf-card gp-tips hf-reveal">
+            <img src="../assets/idea-7Y8FKdm2.webp" alt="ひらめいた顔のフォリオ" width="256" height="256" loading="lazy" />
+            <div><h4>攻略のコツ</h4><p>人気があって、自分とも合う相手と、早く結ばれるほど高得点。</p></div>
+          </div>
+        </div>
+        <p class="gp-mid-play"><a class="hf-button hf-button-primary hf-button-small" href="../play/">ブラウザで遊ぶ</a></p>
+      </section>
+
+      <section class="hf-section gp-next" aria-labelledby="next-title">
+        <h2 class="hf-visually-hidden" id="next-title">ほかのページ</h2>
+        <ul class="hf-grid hf-grid-2">
+          <li class="hf-reveal">
+            <a class="hf-card hf-gate" href="../characters/">
+              <span class="hf-gate-pic gp-faces" aria-hidden="true">
+                <img src="../assets/happy-CjuIEOAw.webp" alt="" width="96" height="96" loading="lazy" />
+                <img src="../assets/explain-DJPvGF5j.webp" alt="" width="96" height="96" loading="lazy" />
+                <img src="../assets/scheme-Ci8GFMq9.webp" alt="" width="96" height="96" loading="lazy" />
+              </span>
+              <span class="hf-gate-body">
+                <span class="hf-gate-en" lang="en">CHARACTERS</span>
+                <h3>キャラクター</h3>
+                <span class="hf-gate-text">案内役のハトリとフォリオ、ショップの店番のユイ。2人と1匹の紹介です。</span>
+                <span class="hf-gate-more">くわしく</span>
+              </span>
+            </a>
+          </li>
+          <li class="hf-reveal">
+            <a class="hf-card hf-gate" href="../system/">
+              <span class="hf-gate-pic hf-gate-chart" aria-hidden="true">
+                <svg viewBox="0 0 300 120">
+                  <defs><linearGradient id="gp-line" x1="0" x2="1"><stop offset="0" stop-color="#6b5cff" /><stop offset=".55" stop-color="#c25cf0" /><stop offset="1" stop-color="#ff7a6b" /></linearGradient></defs>
+                  <path class="hf-gate-chart-grid" d="M10 108H290M10 78H290M10 48H290M10 18H290" />
+                  <path class="gp-chart-line" d="M10 20 C50 26 80 48 120 66 S200 96 290 102" />
+                </svg>
+              </span>
+              <span class="hf-gate-body">
+                <span class="hf-gate-en" lang="en">SYSTEM</span>
+                <h3>しくみ</h3>
+                <span class="hf-gate-text">相手の返事は、確率で決まります。返事の確率のつくりと、分析の画面に出てくる統計の話。</span>
+                <span class="hf-gate-more">くわしく</span>
+              </span>
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="hf-section hf-closing">
+        <img class="hf-closing-mark" src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3e%3c!--%20ハートフォリオのマーク（L2）：ハート型のドーナツグラフを、右肩上がりの矢印が突き抜ける%20--%3e%3cdefs%3e%3cpath%20id='h'%20d='M50%2090%20C22%2070%206%2052%206%2033%20C6%2018%2017%208%2031%208%20C40%208%2046%2013%2050%2020%20C54%2013%2060%208%2069%208%20C83%208%2094%2018%2094%2033%20C94%2052%2078%2070%2050%2090%20Z'/%3e%3cmask%20id='ring'%20maskUnits='userSpaceOnUse'%20x='0'%20y='0'%20width='100'%20height='100'%3e%3cuse%20href='%23h'%20fill='%23fff'/%3e%3cuse%20href='%23h'%20fill='%23000'%20transform='translate(50%2048)%20scale(.52)%20translate(-50%20-48)'/%3e%3c/mask%3e%3c/defs%3e%3cg%20mask='url(%23ring)'%3e%3cpolygon%20points='50,48%2050,-50%20150,-50%20150,148'%20fill='%236b5cff'/%3e%3cpolygon%20points='50,48%20150,148%20-50,148%20-50,66'%20fill='%23c25cf0'/%3e%3cpolygon%20points='50,48%20-50,66%20-50,-50%2050,-50'%20fill='%23ff7a6b'/%3e%3cg%20stroke='%23fff'%20stroke-width='4'%3e%3cline%20x1='50'%20y1='48'%20x2='50'%20y2='0'/%3e%3cline%20x1='50'%20y1='48'%20x2='110'%20y2='108'/%3e%3cline%20x1='50'%20y1='48'%20x2='-10'%20y2='59'/%3e%3c/g%3e%3c/g%3e%3cg%20stroke='%23fff'%20stroke-linecap='round'%20stroke-linejoin='round'%20fill='%23fff'%3e%3cpolyline%20points='26,64%2040,53%2051,59%2081,23'%20fill='none'%20stroke-width='12'/%3e%3cpolygon%20points='89,13%2087.5,28%2075.5,19'%20stroke-width='6'/%3e%3c/g%3e%3cg%20stroke='%231f1b3a'%20stroke-linecap='round'%20stroke-linejoin='round'%20fill='%231f1b3a'%3e%3cpolyline%20points='26,64%2040,53%2051,59%2081,23'%20fill='none'%20stroke-width='6'/%3e%3cpolygon%20points='89,13%2087.5,28%2075.5,19'%20stroke-width='2'/%3e%3c/g%3e%3c/svg%3e" alt="" width="96" height="96" loading="lazy" />
+        <h2 class="hf-section-title">まずは恋活から、遊んでみませんか？</h2>
+        <a class="hf-button hf-button-primary" href="../play/">ブラウザで遊ぶ</a>
+      </section>
+
+      <dialog class="gp-zoom" aria-label="画面写真の拡大">
+        <form method="dialog"><button type="submit" class="gp-zoom-close" aria-label="閉じる"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-close" /></svg></button></form>
+        <div class="gp-zoom-scroll"><img alt="" /></div>
+      </dialog>
+    </main>
+    <footer class="hf-footer">
+  <div class="hf-footer-inner">
+    <a class="hf-footer-logo" href="../"><img src="../assets/w1-B3iGRJyr.webp" alt="ハートフォリオ Heartfolio" width="400" height="86" loading="lazy" decoding="async" /></a>
+    <nav class="hf-footer-nav" aria-label="ページ（フッター）">
+      <a href="../game/">ゲーム紹介</a>
+      <a href="../characters/">キャラクター</a>
+      <a href="../system/">しくみ</a>
+      <a href="../notes/">ノート</a>
+      <a href="../about/">制作について</a>
+      <a href="../play/">遊ぶ</a>
+      <a href="../privacy/">プライバシー</a>
+    </nav>
+    <p class="hf-footer-note">登場する人物とそのプロフは、すべて架空のものです。人物の画像は AI で作りました。実在の人物・団体・マッチングアプリとは関係ありません。</p>
+    <p class="hf-footer-credit">制作：<a href="https://github.com/laplaciannin102" target="_blank" rel="noopener">laplaciannin102</a></p>
+  </div>
+</footer>
+
+  </body>
+</html>

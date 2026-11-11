@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>しくみ｜マチアプ攻略シミュレーター Heartfolio</title>
+    <meta name="description" content="人気の人ほど、いいねは返ってきにくい。マッチングアプリを題材にした恋愛シミュレーション Heartfolio の、返事の確率のつくり、男女の非対称、先行研究との比べ方、ゲームの中のデータ分析（ベイズ推定・ジニ係数など）を紹介します。" />
+    <meta name="theme-color" content="#f7f4ff" />
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" href="../favicon-32.png" type="image/png" sizes="32x32" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="../apple-touch-icon.png" />
+    <link rel="canonical" href="https://laplaciannin102.github.io/heartfolio/system/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ja_JP" />
+    <meta property="og:url" content="https://laplaciannin102.github.io/heartfolio/system/" />
+    <meta property="og:site_name" content="Heartfolio" />
+    <meta property="og:title" content="しくみ｜マチアプ攻略シミュレーター Heartfolio" />
+    <meta property="og:description" content="人気の人ほど、いいねは返ってきにくい。マチアプ攻略シミュレーターの、返事の確率とデータ分析のしくみ。" />
+    <meta property="og:image" content="https://laplaciannin102.github.io/heartfolio/play/ogp.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Heartfolio（ハートフォリオ）マチアプ攻略シミュレーター" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"トップ","item":"https://laplaciannin102.github.io/heartfolio/"},{"@type":"ListItem","position":2,"name":"しくみ","item":"https://laplaciannin102.github.io/heartfolio/system/"}]}]}</script>
+      <link rel="preload" as="font" type="font/woff2" href="../assets/hf-rounded-800-ccCKmJUh.woff2" crossorigin />
+    <script>try{document.documentElement.dataset.hfToc=localStorage.getItem("hf-toc-closed")==="1"?"closed":"open"}catch(e){document.documentElement.dataset.hfToc="open"}</script>
+    <script type="module" crossorigin src="../assets/system-yLQp54J9.js"></script>
+    <link rel="modulepreload" crossorigin href="../assets/chrome-CKUjgVbh.js">
+    <link rel="stylesheet" crossorigin href="../assets/chrome-DOCLPyAI.css">
+    <link rel="stylesheet" crossorigin href="../assets/system-DheW8SrN.css">
+  </head>
+  <body data-toc>
+    <a class="hf-skip" href="#hf-main">本文へ</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="hf-i-heart" viewBox="0 0 24 24"><path d="M12 20s-7.5-4.6-7.5-10.2A4.2 4.2 0 0 1 12 7.2a4.2 4.2 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20z" /></symbol>
+  <symbol id="hf-i-chat" viewBox="0 0 24 24"><path d="M4 5.5h16v10.5H10l-6 4.5z" /><path d="M8.5 10.5h7" /></symbol>
+  <symbol id="hf-i-pin" viewBox="0 0 24 24"><path d="M12 21s-6.5-5.8-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.2 12 21 12 21z" /><circle cx="12" cy="9.8" r="2.4" /></symbol>
+  <symbol id="hf-i-ring" viewBox="0 0 24 24"><circle cx="12" cy="14.5" r="6" /><path d="M9.2 5.2 12 3l2.8 2.2L12 8.4z" /></symbol>
+  <symbol id="hf-i-flag" viewBox="0 0 24 24"><path d="M5.5 21V4" /><path d="M5.5 4.5h12l-2.4 4 2.4 4h-12" /></symbol>
+  <symbol id="hf-i-calendar" viewBox="0 0 24 24"><rect x="4" y="5.5" width="16" height="14.5" rx="2.5" /><path d="M4 10.5h16M8.5 3.5v4M15.5 3.5v4" /></symbol>
+  <symbol id="hf-i-users" viewBox="0 0 24 24"><circle cx="9" cy="8.5" r="3.2" /><path d="M3 20a6 6 0 0 1 12 0" /><circle cx="17" cy="9.5" r="2.5" /><path d="M16 14.2a5 5 0 0 1 5.2 5" /></symbol>
+  <symbol id="hf-i-phone" viewBox="0 0 24 24"><rect x="7" y="3" width="10" height="18" rx="2.5" /><path d="M11 17.5h2" /></symbol>
+  <symbol id="hf-i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M3 12h18M12 3c3.2 3.2 3.2 14.8 0 18M12 3c-3.2 3.2-3.2 14.8 0 18" /></symbol>
+  <symbol id="hf-i-send" viewBox="0 0 24 24"><path d="M20.5 3.5 3.5 10.5l7 3 3 7z" /><path d="m10.5 13.5 10-10" /></symbol>
+  <symbol id="hf-i-chart" viewBox="0 0 24 24"><path d="M4 4v16h16" /><path d="m8 15 4-5 3 3 5-6" /></symbol>
+  <symbol id="hf-i-star" viewBox="0 0 24 24"><path d="m12 3.5 2.6 5.4 5.9.8-4.3 4.1 1 5.9-5.2-2.8-5.2 2.8 1-5.9-4.3-4.1 5.9-.8z" /></symbol>
+  <symbol id="hf-i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" /></symbol>
+  <symbol id="hf-i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" /></symbol>
+  <symbol id="hf-i-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6" /></symbol>
+  <symbol id="hf-i-list" viewBox="0 0 24 24"><path d="M9 6.5h11M9 12h11M9 17.5h11" /><circle cx="4.5" cy="6.5" r="1" /><circle cx="4.5" cy="12" r="1" /><circle cx="4.5" cy="17.5" r="1" /></symbol>
+  <symbol id="hf-i-side" viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="15" rx="2.5" /><path d="M9.5 4.5v15" /></symbol>
+</svg>
+
+<header class="hf-site" data-site>
+  <div class="hf-site-inner">
+    <a class="hf-site-logo" href="../" aria-label="Heartfolio トップ">
+      <img src="../assets/w2-CpmlpJKF.webp" alt="Heartfolio" width="336" height="67" />
+    </a>
+    <nav class="hf-site-nav" id="hf-site-nav" aria-label="サイトのページ" data-nav>
+      <a href="../game/"><span lang="en">GAME</span><small>ゲーム紹介</small></a>
+      <a href="../characters/"><span lang="en">CHARACTERS</span><small>キャラクター</small></a>
+      <a href="../system/"><span lang="en">SYSTEM</span><small>しくみ</small></a>
+      <a href="../notes/"><span lang="en">NOTES</span><small>ノート</small></a>
+      <a href="../about/"><span lang="en">ABOUT</span><small>制作について</small></a>
+    </nav>
+    <button class="hf-menu-button" type="button" aria-expanded="false" aria-controls="hf-site-nav" data-menu-button>
+      <svg class="hf-ico" aria-hidden="true"><use href="#hf-i-menu" /></svg>メニュー
+    </button>
+    <a class="hf-button hf-button-primary hf-site-play" href="../play/"><span lang="en">PLAY</span><small>遊ぶ</small></a>
+  </div>
+</header>
+
+<div class="hf-bar" data-bar>
+  <div class="hf-bar-inner">
+    <a class="hf-bar-logo" href="../" aria-label="Heartfolio トップ"><img src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3e%3c!--%20ハートフォリオのマーク（L2）：ハート型のドーナツグラフを、右肩上がりの矢印が突き抜ける%20--%3e%3cdefs%3e%3cpath%20id='h'%20d='M50%2090%20C22%2070%206%2052%206%2033%20C6%2018%2017%208%2031%208%20C40%208%2046%2013%2050%2020%20C54%2013%2060%208%2069%208%20C83%208%2094%2018%2094%2033%20C94%2052%2078%2070%2050%2090%20Z'/%3e%3cmask%20id='ring'%20maskUnits='userSpaceOnUse'%20x='0'%20y='0'%20width='100'%20height='100'%3e%3cuse%20href='%23h'%20fill='%23fff'/%3e%3cuse%20href='%23h'%20fill='%23000'%20transform='translate(50%2048)%20scale(.52)%20translate(-50%20-48)'/%3e%3c/mask%3e%3c/defs%3e%3cg%20mask='url(%23ring)'%3e%3cpolygon%20points='50,48%2050,-50%20150,-50%20150,148'%20fill='%236b5cff'/%3e%3cpolygon%20points='50,48%20150,148%20-50,148%20-50,66'%20fill='%23c25cf0'/%3e%3cpolygon%20points='50,48%20-50,66%20-50,-50%2050,-50'%20fill='%23ff7a6b'/%3e%3cg%20stroke='%23fff'%20stroke-width='4'%3e%3cline%20x1='50'%20y1='48'%20x2='50'%20y2='0'/%3e%3cline%20x1='50'%20y1='48'%20x2='110'%20y2='108'/%3e%3cline%20x1='50'%20y1='48'%20x2='-10'%20y2='59'/%3e%3c/g%3e%3c/g%3e%3cg%20stroke='%23fff'%20stroke-linecap='round'%20stroke-linejoin='round'%20fill='%23fff'%3e%3cpolyline%20points='26,64%2040,53%2051,59%2081,23'%20fill='none'%20stroke-width='12'/%3e%3cpolygon%20points='89,13%2087.5,28%2075.5,19'%20stroke-width='6'/%3e%3c/g%3e%3cg%20stroke='%231f1b3a'%20stroke-linecap='round'%20stroke-linejoin='round'%20fill='%231f1b3a'%3e%3cpolyline%20points='26,64%2040,53%2051,59%2081,23'%20fill='none'%20stroke-width='6'/%3e%3cpolygon%20points='89,13%2087.5,28%2075.5,19'%20stroke-width='2'/%3e%3c/g%3e%3c/svg%3e" alt="" width="28" height="28" /></a>
+    <a class="hf-bar-page" href="#hf-main" data-bar-page></a>
+    <nav class="hf-bar-chapters" aria-label="このページの章" data-bar-chapters></nav>
+    <span class="hf-bar-current" data-bar-now hidden></span>
+    <button class="hf-bar-here" type="button" aria-expanded="false" data-bar-here>
+      <span>このページ：</span><span data-bar-current></span><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-down" /></svg>
+    </button>
+    <a class="hf-button hf-button-primary hf-button-small hf-bar-play" href="../play/">遊ぶ</a>
+  </div>
+  <div class="hf-bar-menu" id="hf-bar-menu" data-bar-menu hidden></div>
+</div>
+
+    <main id="hf-main" class="hf-sys">
+      <div class="hf-ticker" role="group" aria-label="研究の目安" tabindex="0">
+        <div class="hf-ticker-track" data-strip>
+          <span class="hf-up">▲ 女→男のいいねがマッチになる割合 約41%</span>
+          <span class="hf-down">▼ 男→女のいいねがマッチになる割合 約18%</span>
+          <span class="hf-up">▲ 受け取るいいね 女性は男性の約2.2倍</span>
+          <span class="hf-down">▼ 男性が受け取るいいねのジニ係数 0.60</span>
+          <span class="hf-up">▲ マッチした2人の魅力の相関 0.40</span>
+          <span class="hf-down">▼ ずっと上の相手からの返信（男→女） 約2%</span>
+        </div>
+      </div>
+
+      <section class="hf-sys-head" aria-labelledby="sys-title">
+        <div class="hf-sys-head-body">
+          <p class="hf-kicker"><span lang="en">SYSTEM REPORT</span>しくみ</p>
+          <h1 class="hf-sys-title" id="sys-title">いいねは、どれくらい<span class="hf-nb">返ってくる？</span></h1>
+          <p class="hf-sys-lead">いいねが返ってくるかは、確率で決まります。その確率のつくりと、ゲームの中の分析で使っている統計を紹介します。</p>
+          <p class="hf-sys-head-note">数字は、研究した時点（2026年11月初め）のモデルでシミュレーションした目安です。ゲームのモデルは、そのあとも少し調整しています。</p>
+        </div>
+        <ul class="hf-sys-kpis">
+          <li class="hf-card hf-stat hf-reveal" style="--c: var(--hf-violet-ink)"><span class="hf-num">約18<small>%</small></span><span class="hf-stat-label">男→女のいいねがマッチになる割合</span></li>
+          <li class="hf-card hf-stat hf-reveal" style="--c: var(--hf-coral-ink)"><span class="hf-num">約41<small>%</small></span><span class="hf-stat-label">女→男のいいねがマッチになる割合</span></li>
+          <li class="hf-card hf-stat hf-reveal" style="--c: var(--hf-magenta-ink)"><span class="hf-num">0.60</span><span class="hf-stat-label">男性が受け取るいいねの偏り<span class="hf-nb">（ジニ係数）</span></span></li>
+          <li class="hf-card hf-stat hf-reveal" style="--c: var(--hf-teal-ink)"><span class="hf-num">0.40</span><span class="hf-stat-label">マッチした2人は魅力が似る<span class="hf-nb">（相関）</span></span></li>
+        </ul>
+      </section>
+
+      <section class="hf-section" id="model" aria-labelledby="model-title" data-chapter="返事の確率">
+        <p class="hf-kicker" lang="en">MARKET MODEL</p>
+        <h2 class="hf-section-title" id="model-title">人気の人ほど、<span class="hf-nb">返事は来にくい</span></h2>
+        <p class="hf-section-lead">いいねを受け取った人が返すかどうかは、主に次の4つで変わります。</p>
+        <ul class="hf-grid hf-grid-4 hf-sys-factors">
+          <li class="hf-card hf-reveal"><span class="hf-bubble" style="--c: var(--hf-violet)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-users" /></svg></span><h3>相手の人気</h3><p>人気の人ほど、返す相手を選ぶ基準が高くなります。</p></li>
+          <li class="hf-card hf-reveal"><span class="hf-bubble" style="--c: var(--hf-magenta)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-star" /></svg></span><h3>高嶺の花</h3><p>自分よりずっと人気の相手ほど、返事は来にくくなります。男性から女性へは、差が小さいと<span class="hf-nb">約27%</span>返ってくるのが、大きく上だと<span class="hf-nb">約2%</span>まで下がります。</p></li>
+          <li class="hf-card hf-reveal"><span class="hf-bubble" style="--c: var(--hf-coral-ink)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-heart" /></svg></span><h3>好みと相性</h3><p>相手の好みにどれだけ合うか。2人ごとに決まった、ちょっとした相性の差も入ります。</p></li>
+          <li class="hf-card hf-reveal"><span class="hf-bubble" style="--c: var(--hf-gold-ink)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-calendar" /></svg></span><h3>年齢</h3><p>相手が思う理想の年齢に近いほど好まれ、離れすぎると下がります。</p></li>
+        </ul>
+        <div class="hf-card hf-sys-panel hf-shape" data-shape>
+          <div class="hf-sys-panel-head">
+            <h3>相手の人気と、返ってくる見込み</h3>
+            <span class="hf-pill hf-sys-tag">形のイメージ</span>
+          </div>
+          <div class="hf-shape-body">
+            <div class="hf-chart" data-shape-chart role="img" aria-label="相手の人気が上がるほど、返ってくる見込みが下がる曲線"></div>
+            <div class="hf-controls">
+              <label>あなたの魅力<input type="range" min="30" max="70" value="50" step="1" data-shape-self /><span class="hf-range-ends"><span>低い</span><span>高い</span></span></label>
+              <label>好みと相性<input type="range" min="-1" max="1" value="0" step="0.1" data-shape-chem /><span class="hf-range-ends"><span>合わない</span><span>合う</span></span></label>
+              <p class="hf-note">点線は、真ん中のときの形です。縦の目盛りは書いていません。ゲームの本当の確率ではなく、形だけを見せる図です。</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hf-section" id="market" aria-labelledby="market-title" data-chapter="男女の非対称">
+        <p class="hf-kicker" lang="en">MARKET DATA</p>
+        <h2 class="hf-section-title" id="market-title">男女で、いいねの流れは<span class="hf-nb">こんなに違う</span></h2>
+        <p class="hf-section-lead">このゲームでは、男性は気軽に多く送り、女性は選んで送ります。その前提で動かすと、いいねの流れは男女で大きく違ってきます。</p>
+        <div class="hf-sys-market">
+          <div class="hf-card hf-sys-panel hf-reveal">
+            <div class="hf-sys-panel-head"><h3>送ったいいねがマッチになる割合</h3></div>
+            <div class="hf-sys-rates">
+              <div class="hf-sys-rate" style="--c: var(--hf-violet); --c-ink: var(--hf-violet-ink)">
+                <p class="hf-sys-rate-label"><span class="hf-bubble hf-bubble-sm"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-send" /></svg></span>男 → 女</p>
+                <span class="hf-num">約18<small>%</small></span>
+                <div class="hf-sys-bar"><i style="width: 18%"></i></div>
+              </div>
+              <div class="hf-sys-rate" style="--c: var(--hf-coral); --c-ink: var(--hf-coral-ink)">
+                <p class="hf-sys-rate-label"><span class="hf-bubble hf-bubble-sm"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-send" /></svg></span>女 → 男</p>
+                <span class="hf-num">約41<small>%</small></span>
+                <div class="hf-sys-bar"><i style="width: 41%"></i></div>
+              </div>
+            </div>
+            <p class="hf-note">受け取るいいねは、女性が男性の<span class="hf-nb">約2.2倍。</span>男性で遊ぶなら、いいねの大半が返ってこないのがふつうです。</p>
+          </div>
+          <div class="hf-card hf-sys-panel hf-reveal">
+            <div class="hf-sys-panel-head"><h3>受け取るいいねの偏り</h3><span class="hf-pill hf-sys-tag">ローレンツ曲線</span></div>
+            <div class="hf-lorenz-pair">
+              <figure><div class="hf-chart" data-lorenz="0.60" role="img" aria-label="男性が受け取るいいねのローレンツ曲線（ジニ係数に合わせた模式図）。ジニ係数 0.60"></div><figcaption>男性が受け取る<strong>ジニ係数 0.60</strong></figcaption></figure>
+              <figure><div class="hf-chart" data-lorenz="0.41" role="img" aria-label="女性が受け取るいいねのローレンツ曲線（ジニ係数に合わせた模式図）。ジニ係数 0.41"></div><figcaption>女性が受け取る<strong>ジニ係数 0.41</strong></figcaption></figure>
+            </div>
+            <p class="hf-note">曲線が対角線から離れるほど、いいねが一部の人に集まっています。男性の受け取るいいねは、一部の人に強く集中します。曲線は、シミュレーションのジニ係数に合わせて、対数正規分布を仮定して描いた模式図です。</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="hf-section" id="backtest" aria-labelledby="backtest-title" data-chapter="研究との一致">
+        <p class="hf-kicker" lang="en">BACKTEST</p>
+        <h2 class="hf-section-title" id="backtest-title">研究で知られた傾向が、<span class="hf-nb">ゲームでも起きる</span></h2>
+        <p class="hf-section-lead">モデルに直接は入れていない傾向が、シミュレーションの結果に現れました。</p>
+        <ul class="hf-sys-backtests">
+          <li class="hf-reveal">
+            <div class="hf-card hf-sys-study"><span class="hf-bubble hf-bubble-sm"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-list" /></svg></span><div><small>研究</small><p>人は自分より望ましい相手に連絡する。望ましさの順位で、平均<span class="hf-nb">約25%上<sup>1</sup></span></p></div></div>
+            <span class="hf-sys-eq"><span class="hf-pill">向きが同じ</span></span>
+            <div class="hf-card hf-sys-game"><span class="hf-bubble hf-bubble-sm"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-heart" /></svg></span><div><small>このゲームのモデル</small><p>いいねの7〜8割が、自分より人気の相手へ。魅力の比の中央値で14〜33%上。研究は順位の差、こちらは魅力の比なので、比べられるのは向きまで</p></div></div>
+          </li>
+          <li class="hf-reveal">
+            <div class="hf-card hf-sys-study"><span class="hf-bubble hf-bubble-sm"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-list" /></svg></span><div><small>研究</small><p>望ましさの差が大きいほど、返信されにくい<sup>1</sup></p></div></div>
+            <span class="hf-sys-eq"><span class="hf-pill">向きが同じ</span></span>
+            <div class="hf-card hf-sys-game"><span class="hf-bubble hf-bubble-sm"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-heart" /></svg></span><div><small>このゲームのモデル</small><p>男→女で、差が小さいと返信は<span class="hf-nb">約27%、</span><span class="hf-nb">大きく上だと約2%</span></p></div></div>
+          </li>
+          <li class="hf-reveal">
+            <div class="hf-card hf-sys-study"><span class="hf-bubble hf-bubble-sm"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-list" /></svg></span><div><small>研究</small><p>恋人どうしの外見の魅力の相関は<span class="hf-nb">約0.39<sup>2</sup></span></p></div></div>
+            <span class="hf-sys-eq"><span class="hf-pill">近い大きさ</span></span>
+            <div class="hf-card hf-sys-game"><span class="hf-bubble hf-bubble-sm"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-heart" /></svg></span><div><small>このゲームのモデル</small><p>マッチした2人の相関は0.40（魅力を1つにまとめたモデル）、0.29（属性を分けたモデル）。いいねの段階では<span class="hf-nb">約0.1</span>で、返信の段階で似た者どうしになる。モデルの魅力は顔・年収・学歴などをまとめた値。研究は外見だけの相関なので、比べられるのは大きさの目安まで</p></div></div>
+          </li>
+          <li class="hf-reveal">
+            <div class="hf-card hf-sys-study"><span class="hf-bubble hf-bubble-sm"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-chart" /></svg></span><div><small>非公式な集計</small><p>男性が受け取るいいねのジニ係数は<span class="hf-nb">約0.54〜0.58。</span>少人数の調査などからの推計で、目安です</p></div></div>
+            <span class="hf-sys-eq"><span class="hf-pill">近い大きさ</span></span>
+            <div class="hf-card hf-sys-game"><span class="hf-bubble hf-bubble-sm"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-heart" /></svg></span><div><small>このゲームのモデル</small><p>男性が受け取るいいねのジニ係数は 0.60</p></div></div>
+          </li>
+        </ul>
+        <ol class="hf-refs">
+          <li>Bruch, E. E., &amp; Newman, M. E. J. (2018). Aspirational pursuit of mates in online dating markets. <i>Science Advances</i>, 4(8). <a href="https://doi.org/10.1126/sciadv.aap9815" target="_blank" rel="noopener">doi:10.1126/sciadv.aap9815</a></li>
+          <li>Feingold, A. (1988). Matching for attractiveness in romantic partners and same-sex friends: A meta-analysis and theoretical critique. <i>Psychological Bulletin</i>, 104(2), 226–235. <a href="https://doi.org/10.1037/0033-2909.104.2.226" target="_blank" rel="noopener">doi:10.1037/0033-2909.104.2.226</a></li>
+        </ol>
+      </section>
+
+      <section class="hf-section" id="tools" aria-labelledby="tools-title" data-chapter="データ分析">
+        <p class="hf-kicker" lang="en">ANALYST TOOLS</p>
+        <h2 class="hf-section-title" id="tools-title">統計の道具で、<span class="hf-nb">自分のいいねを読み解く</span></h2>
+        <p class="hf-section-lead">活動の分析とフォリオの相談室には、統計の考え方を使った図があります。ここでは、見本の数字を動かして試せます。</p>
+        <div class="hf-sys-tools">
+          <div class="hf-card hf-sys-panel" data-bayes>
+            <div class="hf-sys-panel-head"><span class="hf-bubble hf-bubble-sm" style="--c: var(--hf-violet)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-chart" /></svg></span><h3>返ってくる率はどのくらい？</h3><span class="hf-pill hf-sys-tag">ベイズ推定</span></div>
+            <div class="hf-chart" data-bayes-chart role="img" aria-label="返ってくる率の確からしさの山"></div>
+            <div class="hf-controls hf-controls-row">
+              <label>返事が分かったいいね<output data-bayes-n-out>20</output><input type="range" min="0" max="60" value="20" step="1" aria-label="返事が分かったいいね" data-bayes-n /></label>
+              <label>そのうち返ってきた<output data-bayes-k-out>4</output><input type="range" min="0" max="20" value="4" step="1" aria-label="そのうち返ってきた" data-bayes-k /></label>
+            </div>
+            <p class="hf-result" data-bayes-text aria-live="polite"></p>
+            <p class="hf-where">ゲームでは：活動の分析。件数を動かすと山が変わっていく様子を見られます。相手の人気や魅力ごとに山を上下に並べ、返ってくる率を比べられます。反応率グラフも件数を動かして描き直せます。棒には95%の範囲の線が付きます。</p>
+          </div>
+
+          <div class="hf-card hf-sys-panel" data-gini>
+            <div class="hf-sys-panel-head"><span class="hf-bubble hf-bubble-sm" style="--c: var(--hf-magenta)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-users" /></svg></span><h3>いいねは、どれだけ偏っている？</h3><span class="hf-pill hf-sys-tag">ジニ係数</span></div>
+            <div class="hf-chart" data-gini-chart role="img" aria-label="ローレンツ曲線"></div>
+            <div class="hf-controls">
+              <label>偏り<input type="range" min="0" max="0.8" value="0.5" step="0.01" data-gini-input /><span class="hf-range-ends"><span>全員同じ</span><span>一部に集中</span></span></label>
+            </div>
+            <p class="hf-result" data-gini-text aria-live="polite"></p>
+            <p class="hf-where">ゲームでは：活動の分析</p>
+          </div>
+
+          <div class="hf-card hf-sys-panel" data-bandit>
+            <div class="hf-sys-panel-head"><span class="hf-bubble hf-bubble-sm" style="--c: var(--hf-coral-ink)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-send" /></svg></span><h3>誰にいいねすればいい？</h3><span class="hf-pill hf-sys-tag">多腕バンディット</span></div>
+            <p class="hf-note hf-bandit-lead">送って試しながら、1回あたりの幸福度の見込み<span class="hf-nb">（返ってくる率×幸福度）</span>が大きい帯に、多く送るようにしていきます。</p>
+            <div class="hf-chart" data-bandit-chart role="img" aria-label="人気の帯ごとの、送った回数と、1回送って得られる幸福度の見込みの範囲"></div>
+            <ul class="hf-note hf-bandit-legend">
+              <li><span class="hf-bandit-key hf-bandit-key-band" aria-hidden="true"></span>見込みは、たぶんこの間（95%の範囲）</li>
+              <li><span class="hf-bandit-key hf-bandit-key-dot" aria-hidden="true"></span>これまでの実績（返ってきた相手の幸福度の合計÷送った回数）</li>
+              <li><span class="hf-bandit-key hf-bandit-key-more" aria-hidden="true">▶</span>20より右にはみ出す（実績は数字で出す）</li>
+            </ul>
+            <div class="hf-controls hf-controls-buttons">
+              <button type="button" class="hf-button hf-button-small hf-sys-button" data-bandit-send="1">1回送る</button>
+              <button type="button" class="hf-button hf-button-small hf-sys-button" data-bandit-send="10">10回送る</button>
+              <button type="button" class="hf-button hf-button-small hf-button-ghost" data-bandit-reset>やり直す</button>
+            </div>
+            <p class="hf-result" data-bandit-text aria-live="polite"></p>
+            <details class="hf-details"><summary>この例の、帯ごとの本当の値</summary><p data-bandit-truth></p></details>
+            <p class="hf-where">ゲームでは：フォリオの相談室</p>
+          </div>
+
+          <div class="hf-card hf-sys-panel" data-secretary>
+            <div class="hf-sys-panel-head"><span class="hf-bubble hf-bubble-sm" style="--c: var(--hf-gold-ink)"><svg class="hf-ico" aria-hidden="true"><use href="#hf-i-flag" /></svg></span><h3>最初の何人を見送る？</h3><span class="hf-pill hf-sys-tag">37%ルール</span></div>
+            <div class="hf-chart" data-secretary-chart role="img" aria-label="見送る人数と、いちばんの人を選べる確率"></div>
+            <div class="hf-controls">
+              <label>候補 20人のうち、最初に見送る人数<output data-secretary-out>7</output><input type="range" min="0" max="19" value="7" step="1" aria-label="最初に見送る人数" data-secretary-input /></label>
+            </div>
+            <p class="hf-result" data-secretary-text aria-live="polite"></p>
+            <p class="hf-note">候補の数が前もって分かり、断った人には戻れない、などの前提つきの話です。マチアプにそのまま当てはまるかは、相談室のコラムで。</p>
+            <p class="hf-where">ゲームでは：フォリオの相談室のコラム</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="hf-section hf-closing">
+        <img class="hf-closing-mark" src="data:image/svg+xml,%3csvg%20xmlns='http://www.w3.org/2000/svg'%20viewBox='0%200%20100%20100'%3e%3c!--%20ハートフォリオのマーク（L2）：ハート型のドーナツグラフを、右肩上がりの矢印が突き抜ける%20--%3e%3cdefs%3e%3cpath%20id='h'%20d='M50%2090%20C22%2070%206%2052%206%2033%20C6%2018%2017%208%2031%208%20C40%208%2046%2013%2050%2020%20C54%2013%2060%208%2069%208%20C83%208%2094%2018%2094%2033%20C94%2052%2078%2070%2050%2090%20Z'/%3e%3cmask%20id='ring'%20maskUnits='userSpaceOnUse'%20x='0'%20y='0'%20width='100'%20height='100'%3e%3cuse%20href='%23h'%20fill='%23fff'/%3e%3cuse%20href='%23h'%20fill='%23000'%20transform='translate(50%2048)%20scale(.52)%20translate(-50%20-48)'/%3e%3c/mask%3e%3c/defs%3e%3cg%20mask='url(%23ring)'%3e%3cpolygon%20points='50,48%2050,-50%20150,-50%20150,148'%20fill='%236b5cff'/%3e%3cpolygon%20points='50,48%20150,148%20-50,148%20-50,66'%20fill='%23c25cf0'/%3e%3cpolygon%20points='50,48%20-50,66%20-50,-50%2050,-50'%20fill='%23ff7a6b'/%3e%3cg%20stroke='%23fff'%20stroke-width='4'%3e%3cline%20x1='50'%20y1='48'%20x2='50'%20y2='0'/%3e%3cline%20x1='50'%20y1='48'%20x2='110'%20y2='108'/%3e%3cline%20x1='50'%20y1='48'%20x2='-10'%20y2='59'/%3e%3c/g%3e%3c/g%3e%3cg%20stroke='%23fff'%20stroke-linecap='round'%20stroke-linejoin='round'%20fill='%23fff'%3e%3cpolyline%20points='26,64%2040,53%2051,59%2081,23'%20fill='none'%20stroke-width='12'/%3e%3cpolygon%20points='89,13%2087.5,28%2075.5,19'%20stroke-width='6'/%3e%3c/g%3e%3cg%20stroke='%231f1b3a'%20stroke-linecap='round'%20stroke-linejoin='round'%20fill='%231f1b3a'%3e%3cpolyline%20points='26,64%2040,53%2051,59%2081,23'%20fill='none'%20stroke-width='6'/%3e%3cpolygon%20points='89,13%2087.5,28%2075.5,19'%20stroke-width='2'/%3e%3c/g%3e%3c/svg%3e" alt="" width="96" height="96" loading="lazy" />
+        <h2 class="hf-section-title">分析の続きは、ゲームの中で</h2>
+        <a class="hf-button hf-button-primary" href="../play/">ブラウザで遊ぶ</a>
+      </section>
+    </main>
+    <footer class="hf-footer">
+  <div class="hf-footer-inner">
+    <a class="hf-footer-logo" href="../"><img src="../assets/w1-B3iGRJyr.webp" alt="ハートフォリオ Heartfolio" width="400" height="86" loading="lazy" decoding="async" /></a>
+    <nav class="hf-footer-nav" aria-label="ページ（フッター）">
+      <a href="../game/">ゲーム紹介</a>
+      <a href="../characters/">キャラクター</a>
+      <a href="../system/">しくみ</a>
+      <a href="../notes/">ノート</a>
+      <a href="../about/">制作について</a>
+      <a href="../play/">遊ぶ</a>
+      <a href="../privacy/">プライバシー</a>
+    </nav>
+    <p class="hf-footer-note">登場する人物とそのプロフは、すべて架空のものです。人物の画像は AI で作りました。実在の人物・団体・マッチングアプリとは関係ありません。</p>
+    <p class="hf-footer-credit">制作：<a href="https://github.com/laplaciannin102" target="_blank" rel="noopener">laplaciannin102</a></p>
+  </div>
+</footer>
+
+  </body>
+</html>

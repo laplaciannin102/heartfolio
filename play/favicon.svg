@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- ハートフォリオのマーク（L2）：ハート型のドーナツグラフを、右肩上がりの矢印が突き抜ける -->
+  <defs>
+    <path id="h" d="M50 90 C22 70 6 52 6 33 C6 18 17 8 31 8 C40 8 46 13 50 20 C54 13 60 8 69 8 C83 8 94 18 94 33 C94 52 78 70 50 90 Z"/>
+    <mask id="ring" maskUnits="userSpaceOnUse" x="0" y="0" width="100" height="100">
+      <use href="#h" fill="#fff"/>
+      <use href="#h" fill="#000" transform="translate(50 48) scale(.52) translate(-50 -48)"/>
+    </mask>
+  </defs>
+  <g mask="url(#ring)">
+    <polygon points="50,48 50,-50 150,-50 150,148" fill="#6b5cff"/>
+    <polygon points="50,48 150,148 -50,148 -50,66" fill="#c25cf0"/>
+    <polygon points="50,48 -50,66 -50,-50 50,-50" fill="#ff7a6b"/>
+    <g stroke="#fff" stroke-width="4">
+      <line x1="50" y1="48" x2="50" y2="0"/>
+      <line x1="50" y1="48" x2="110" y2="108"/>
+      <line x1="50" y1="48" x2="-10" y2="59"/>
+    </g>
+  </g>
+  <g stroke="#fff" stroke-linecap="round" stroke-linejoin="round" fill="#fff">
+    <polyline points="26,64 40,53 51,59 81,23" fill="none" stroke-width="12"/>
+    <polygon points="89,13 87.5,28 75.5,19" stroke-width="6"/>
+  </g>
+  <g stroke="#1f1b3a" stroke-linecap="round" stroke-linejoin="round" fill="#1f1b3a">
+    <polyline points="26,64 40,53 51,59 81,23" fill="none" stroke-width="6"/>
+    <polygon points="89,13 87.5,28 75.5,19" stroke-width="2"/>
+  </g>
+</svg>
